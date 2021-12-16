@@ -17,14 +17,14 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/nvim-cmp'
-Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
 Plug 'onsails/lspkind-nvim'
-Plug 'github/copilot.vim'
 "
 " git stuff
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline' "show current branch
 Plug 'tpope/vim-rhubarb'
+" git diiff view" 
+Plug 'sindrets/diffview.nvim'
 
 Plug 'mbbill/undotree'
 
@@ -47,9 +47,6 @@ Plug 'sbdchd/neoformat'
 " Inetllisense
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" dracula
-Plug 'dracula/vim', { 'as': 'dracula' }
-
 " TypeScript stuff?
 Plug 'neovim/nvim-lspconfig'
 Plug 'jose-elias-alvarez/null-ls.nvim'
@@ -57,11 +54,6 @@ Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 
 " run build & test commands
 Plug 'tpope/vim-dispatch'
-
-" autocomplete pairs
-"Plug 'rstacruz/vim-closer'
-"Plug 'tpope/vim-endwise'
-
 
 Plug 'terryma/vim-multiple-cursors'
 
@@ -71,17 +63,10 @@ Plug 'sbdchd/neoformat'
 "todo
 Plug 'vuciv/vim-bujo'
 
+
 call plug#end()
 
 lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
-""// TypeScript grammar
-"require'tree-sitter-typescript'.typescript; 
-""// TSX grammar
-"require'tree-sitter-typescript'.tsx;
-
-"require("telescope").load_extension('harpoon')
-"lua require("theprimeagen")
-
 
 
 set tabstop=4 softtabstop=4
@@ -148,11 +133,35 @@ nnoremap Y yg$
 nnoremap n nzzzv
 nnoremap N Nzzzv
 nnoremap J mzJ`z
+"
+"" COC - Autocomplete
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
 
+
+" GIT REMAPS
 " gir remaps
 nmap <leader>gh :G<CR>
 nmap <leader>gj :diffget //3<CR>
 nmap <leader>gf :diffget //2<CR>
+" diff view
+nnoremap <leader>dv :DiffviewOpen<CR>
+nnoremap <leader>dc :DiffviewClose<CR>
  
 "vim todo
 nmap <Leader>tu <Plug>BujoChecknormal
@@ -176,9 +185,7 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 
-"packadd! dracula
 syntax enable
-"colorscheme dracula
 colorscheme gruvbox
 highlight Normal guibg=none
 
@@ -189,12 +196,7 @@ augroup END
 
 augroup THE_PRIMEAGEN
     autocmd!
-    "autocmd BufWritePre ts,tsx Neoformat
-    "autocmd BufWritePre * undojoin | Neoformat
-    autocmd BufWritePre *ts Neoformat
-    "autocmd BufWritePre *tsx Neoformat
-    "autocmd BufWritePre lua,cpp,c,h,hpp,cxx,cc Neoformat
-    "autocmd BufWritePre * %s/\s\+$//e
-    "autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
+    autocmd BufWritePre * undojoin | Neoformat
 augroup END
+
 
