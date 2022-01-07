@@ -67,6 +67,7 @@ Plug 'vuciv/vim-bujo'
 call plug#end()
 
 lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
+lua require'telescope'.setup{defaults={  path_display ={"smart"} } }
 
 
 set tabstop=4 softtabstop=4
