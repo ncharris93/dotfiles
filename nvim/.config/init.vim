@@ -22,6 +22,7 @@ Plug 'onsails/lspkind-nvim'
 " git stuff
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline' "show current branch
+Plug 'airblade/vim-gitgutter' 
 Plug 'tpope/vim-rhubarb'
 " git diiff view" 
 Plug 'sindrets/diffview.nvim'
