@@ -42,6 +42,9 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
 
+" dir manipulation
+Plug 'preservim/nerdtree'
+
 " prettier
 Plug 'sbdchd/neoformat'
 
@@ -105,6 +108,17 @@ set shortmess+=c
 let mapleader = " "
 nnoremap <silent> Q <nop>
 
+
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+
+" copy, add block quote, escape, paste
+nnoremap <leader>bc V$%dO{}i/**/hiP
+" reload current file 
+nnoremap <leader>r :e!
+
+
+
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
@@ -164,6 +178,7 @@ endfunction
 
 " GIT REMAPS
 " gir remaps
+nnoremap <leader>ga :Git fetch --all<CR>
 nmap <leader>gh :G<CR>
 nmap <leader>gj :diffget //3<CR>
 nmap <leader>gf :diffget //2<CR>
@@ -245,7 +260,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'rust_analyzer', 'tsserver' }
+local servers = { 'pyright', 'tsserver' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
