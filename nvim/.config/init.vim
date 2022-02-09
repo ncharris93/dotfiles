@@ -11,6 +11,8 @@ set wildignore+=**/.git/*
 "
 " Plugin stuffs
 call plug#begin('~/.vim/plugged')
+Plug 'preservim/nerdtree' " creating files
+
 
 "LSP config
 Plug 'neovim/nvim-lspconfig'
