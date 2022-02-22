@@ -69,6 +69,9 @@ Plug 'sbdchd/neoformat'
 "todo
 Plug 'vuciv/vim-bujo'
 
+"Auto-pair autocomplete autoclose
+Plug 'jiangmiao/auto-pairs'
+
 
 call plug#end()
 
@@ -182,6 +185,7 @@ endfunction
 " gir remaps
 nnoremap <leader>ga :Git fetch --all<CR>
 nmap <leader>gh :G<CR>
+nmap <leader>gd :Gdiffsplit!<CR>
 nmap <leader>gj :diffget //3<CR>
 nmap <leader>gf :diffget //2<CR>
 " diff view
