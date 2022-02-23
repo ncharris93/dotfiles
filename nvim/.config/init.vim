@@ -71,13 +71,17 @@ Plug 'vuciv/vim-bujo'
 
 "Auto-pair autocomplete autoclose
 Plug 'jiangmiao/auto-pairs'
+" auto close HTML tags
+Plug 'alvan/vim-closetag'
 
 
 call plug#end()
 
+"Close Tag preferences
+let g:closetag_filetypes = 'html,xhtml,phtml,tsx,jsx'
+
 lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
 lua require'telescope'.setup{defaults={  path_display ={"smart"} } }
-
 
 set tabstop=4 softtabstop=4
 set shiftwidth=4
