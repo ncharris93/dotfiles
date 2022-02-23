@@ -78,7 +78,10 @@ Plug 'alvan/vim-closetag'
 call plug#end()
 
 "Close Tag preferences
-let g:closetag_filetypes = 'html,xhtml,phtml,tsx,jsx'
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx'
+
+"NerdTree preferences
+let NERDTreeShowHidden=1
 
 lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
 lua require'telescope'.setup{defaults={  path_display ={"smart"} } }
