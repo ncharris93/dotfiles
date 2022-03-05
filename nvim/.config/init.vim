@@ -14,6 +14,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'preservim/nerdtree' " creating files
 
 
+" markdown preview
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+
 "LSP config
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
