@@ -118,8 +118,6 @@ set cmdheight=2
 set updatetime=50
 set shortmess+=c
 
-
-
 let mapleader = " "
 nnoremap <silent> Q <nop>
 
@@ -198,6 +196,9 @@ nmap <leader>gh :G<CR>
 nmap <leader>gd :Gdiffsplit!<CR>
 nmap <leader>gj :diffget //3<CR>
 nmap <leader>gf :diffget //2<CR>
+" write & quit
+nmap <leader>gw :Gwq
+
 " diff view
 nnoremap <leader>dv :DiffviewOpen<CR>
 nnoremap <leader>dc :DiffviewClose<CR>
@@ -229,7 +230,7 @@ endif
 
 syntax enable
 colorscheme gruvbox
-highlight Normal guibg=none ctermbg=none
+highlight Normal guibg=none ctermbg=none 
 
 augroup highlight_yank
     autocmd!
