@@ -124,8 +124,7 @@ nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
 " copy, add block quote, escape, paste
-nnoremap <leader>bc V$%dO{}i/**/hi
-P
+nnoremap <leader>bc V$%dO{}i/**/hi P
 " reload current file
 nnoremap <leader>r :e!
 
