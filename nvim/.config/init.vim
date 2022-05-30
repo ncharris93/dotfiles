@@ -81,6 +81,9 @@ call plug#end()
 "Close Tag preferences
 let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx'
 
+" prettier from project file first
+let g:neoformat_try_node_exe = 1
+
 "NerdTree preferences
 let NERDTreeShowHidden=1
 
