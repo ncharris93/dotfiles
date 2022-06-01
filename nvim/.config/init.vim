@@ -27,13 +27,13 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'onsails/lspkind-nvim'
-"
+
 " git stuff
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline' "show current branch
-Plug 'airblade/vim-gitgutter' 
+Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-rhubarb'
-" git diiff view" 
+" git diiff view"
 Plug 'sindrets/diffview.nvim'
 
 Plug 'mbbill/undotree'
@@ -56,6 +56,7 @@ Plug 'preservim/nerdtree'
 
 " prettier
 Plug 'sbdchd/neoformat'
+"Plug 'Chiel92/vim-autoformat'
 
 " Inetllisense
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -70,9 +71,6 @@ Plug 'tpope/vim-dispatch'
 
 Plug 'terryma/vim-multiple-cursors'
 
-" prettier
-Plug 'sbdchd/neoformat'
- 
 "todo
 Plug 'vuciv/vim-bujo'
 
@@ -86,6 +84,9 @@ call plug#end()
 
 "Close Tag preferences
 let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx'
+
+" prettier from project file first
+let g:neoformat_try_node_exe = 1
 
 "NerdTree preferences
 let NERDTreeShowHidden=1
@@ -130,8 +131,8 @@ nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
 " copy, add block quote, escape, paste
-nnoremap <leader>bc V$%dO{}i/**/hiP
-" reload current file 
+nnoremap <leader>bc V$%dO{}i/**/hi P
+" reload current file
 nnoremap <leader>r :e!
 
 
@@ -166,7 +167,7 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
 " make Y act like other capital letters
-nnoremap Y yg$ 
+nnoremap Y yg$
 
 " Keep stuff centered as jumping around
 nnoremap n nzzzv
@@ -183,13 +184,13 @@ nmap <silent> gr <Plug>(coc-references)
 nmap <leader>rn <Plug>(coc-rename)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    elseif (coc#rpc#ready())
+        call CocActionAsync('doHover')
+    else
+        execute '!' . &keywordprg . " " . expand('<cword>')
+    endif
 endfunction
 
 
@@ -206,7 +207,7 @@ nmap <leader>gw :Gwq
 " diff view
 nnoremap <leader>dv :DiffviewOpen<CR>
 nnoremap <leader>dc :DiffviewClose<CR>
- 
+
 "vim todo
 nmap <Leader>tu <Plug>BujoChecknormal
 nmap <Leader>th <Plug>BujoAddnormal
@@ -227,14 +228,15 @@ vnoremap <leader>d "_d
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 
 if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 
 syntax enable
 colorscheme gruvbox
-highlight Normal guibg=none ctermbg=none 
+let gruvbox_contrast_dark="hard"
+highlight Normal guibg=none ctermbg=none
 
 augroup highlight_yank
     autocmd!
@@ -243,42 +245,110 @@ augroup END
 
 augroup THE_PRIMEAGEN
     autocmd!
-    autocmd BufWritePre * undojoin | Neoformat
+    autocmd BufWritePre * undojoin | Neoformat prettier
+    "au BufWrite * :Autoformat
 augroup END
 
 lua << EOF
 local nvim_lsp = require('lspconfig')
 
+nvim_lsp.tsserver.setup({
+-- Needed for inlayHints. Merge this table with your settings or copy
+-- it from the source if you want to add your own init_options.
+init_options = require("nvim-lsp-ts-utils").init_options,
+--
+on_attach = function(client, bufnr)
+local ts_utils = require("nvim-lsp-ts-utils")
+
+-- defaults
+ts_utils.setup({
+debug = false,
+disable_commands = false,
+            enable_import_on_completion = false,
+
+            -- import all
+            import_all_timeout = 5000, -- ms
+            -- lower numbers = higher priority
+            import_all_priorities = {
+                same_file = 1, -- add to existing import statement
+                local_files = 2, -- git files or files with relative path markers
+                buffer_content = 3, -- loaded buffer content
+                buffers = 4, -- loaded buffer names
+                },
+            import_all_scan_buffers = 100,
+            import_all_select_source = false,
+            -- if false will avoid organizing imports
+            always_organize_imports = true,
+
+            -- filter diagnostics
+            filter_out_diagnostics_by_severity = {},
+            filter_out_diagnostics_by_code = {},
+
+            -- inlay hints
+            auto_inlay_hints = true,
+            inlay_hints_highlight = "Comment",
+            inlay_hints_priority = 200, -- priority of the hint extmarks
+            inlay_hints_throttle = 150, -- throttle the inlay hint request
+            inlay_hints_format = { -- format options for individual hint kind
+            Type = {},
+            Parameter = {},
+            Enum = {},
+            -- Example format customization for `Type` kind:
+            -- Type = {
+            --     highlight = "Comment",
+            --     text = function(text)
+            --         return "->" .. text:sub(2)
+            --     end,
+            -- },
+            },
+
+        -- update imports on file move
+        update_imports_on_move = false,
+        require_confirmation_on_move = false,
+        watch_dir = nil,
+        })
+
+    -- required to fix code action ranges and filter diagnostics
+    ts_utils.setup_client(client)
+
+    -- no default maps, so you may want to define some here
+    local opts = { silent = true }
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", ":TSLspOrganize<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", ":TSLspRenameFile<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", ":TSLspImportAll<CR>", opts)
+end,
+})
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
-  -- Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+-- Enable completion triggered by <c-x><c-o>
+buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  -- Mappings.
-  local opts = { noremap=true, silent=true }
+-- Mappings.
+local opts = { noremap=true, silent=true }
 
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  -- buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
-  buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+-- See `:help vim.lsp.*` for documentation on any of the below functions
+buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+-- buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
 end
 
@@ -286,12 +356,12 @@ end
 -- map buffer local keybindings when the language server attaches
 local servers = { 'pyright', 'tsserver' }
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    }
-  }
+    nvim_lsp[lsp].setup {
+        on_attach = on_attach,
+        flags = {
+            debounce_text_changes = 150,
+            }
+        }
 end
 
 -- Init the Specs Visual aid for Jumping
@@ -321,14 +391,33 @@ EOF
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
 "(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
 if (has("nvim"))
+<<<<<<< HEAD
   "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+=======
+    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+>>>>>>> 8808d9a2ce7b8bb3b75b17987c964731fbec11bd
 endif
 "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
 "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
 " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
 if (has("termguicolors"))
+<<<<<<< HEAD
   set termguicolors
 endif
 
 
+=======
+    set termguicolors
+endif
+
+
+
+
+" testing out new autoformatter
+"let g:python3_host_prog="/path/to/python/executable/"
+"let g:autoformat_autoindent = 1
+"let g:autoformat_retab = 0
+"let g:autoformat_remove_trailing_spaces = 0
+>>>>>>> 8808d9a2ce7b8bb3b75b17987c964731fbec11bd
