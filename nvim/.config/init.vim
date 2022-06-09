@@ -45,6 +45,8 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'ThePrimeagen/harpoon'
 
+
+Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 Plug 'gruvbox-community/gruvbox'
 
 " Neovim Tree shitter
@@ -54,7 +56,7 @@ Plug 'nvim-treesitter/playground'
 " dir manipulation
 Plug 'preservim/nerdtree'
 
-" prettier
+Plug 'fsouza/prettierd'
 Plug 'sbdchd/neoformat'
 "Plug 'Chiel92/vim-autoformat'
 
@@ -234,9 +236,12 @@ endif
 
 
 syntax enable
-colorscheme gruvbox
-let gruvbox_contrast_dark="hard"
-highlight Normal guibg=none ctermbg=none
+colorscheme catppuccin
+"let g:catppuccin_flavour = "latte" " latte, frappe, macchiato, mocha
+let g:catppuccin_flavour = "mocha" " latte, frappe, macchiato, mocha
+"colorscheme gruvbox
+"let gruvbox_contrast_dark="hard"
+"highlight Normal guibg=none ctermbg=none
 
 augroup highlight_yank
     autocmd!
