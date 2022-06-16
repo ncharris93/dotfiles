@@ -1,3 +1,4 @@
+set shell=/bin/bash " using the fish shell apparently breaks things
 
 source $HOME/.config/nvim/plug-config/coc.vim
 
