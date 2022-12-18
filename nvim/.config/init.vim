@@ -1,6 +1,6 @@
 set shell=/bin/bash " using the fish shell apparently breaks things
 
-source $HOME/.config/nvim/plug-config/coc.vim
+"source $HOME/.config/nvim/plug-config/coc.vim
 
 " Ignore files
 set wildignore+=*_build/*
@@ -178,6 +178,8 @@ nnoremap N Nzzzv
 nnoremap J mzJ`z
 
 "" COC - Autocomplete
+
+inoremap <silent><expr> <c-space> coc#refresh()
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
