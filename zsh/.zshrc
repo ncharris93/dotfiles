@@ -96,7 +96,12 @@ plugins=(
   pyenv
   python
   react-native
+  rust
   tmux
+
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -130,3 +135,9 @@ source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 source ~/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+export PATH="${HOME}/.pyenv/shims:${PATH}"
