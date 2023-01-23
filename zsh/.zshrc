@@ -101,7 +101,6 @@ plugins=(
 
   zsh-autosuggestions
   zsh-syntax-highlighting
-
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -141,3 +140,6 @@ export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 export PATH="${HOME}/.pyenv/shims:${PATH}"
+
+# rbenv
+eval "$(rbenv init - zsh)"
