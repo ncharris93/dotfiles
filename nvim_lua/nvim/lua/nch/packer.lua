@@ -1,5 +1,20 @@
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
 
+
+-- bootstrap packer so that it's always installed
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
+end
+
+local packer_bootstrap = ensure_packer()
+
 -- Only required if you have packer configured as `opt`
 vim.cmd [[packadd packer.nvim]]
 
@@ -55,5 +70,7 @@ return require('packer').startup(function(use)
    use('airblade/vim-gitgutter') -- git gutter icons
    use('vim-airline/vim-airline') -- show current branch
    use('mfussenegger/nvim-lint') -- linting
+
+   use 'sbdchd/neoformat'
 
 end)
