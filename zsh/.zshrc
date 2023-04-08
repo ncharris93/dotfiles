@@ -143,3 +143,5 @@ export PATH="${HOME}/.pyenv/shims:${PATH}"
 
 # rbenv
 eval "$(rbenv init - zsh)"
+export PATH="/opt/homebrew/opt/qt@5/bin:$PATH"
+export PATH="/opt/homebrew/opt/pyqt@5/5.15.4_1/bin:$PATH"
