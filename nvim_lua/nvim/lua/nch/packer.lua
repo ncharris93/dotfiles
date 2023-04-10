@@ -71,6 +71,6 @@ return require('packer').startup(function(use)
    use('vim-airline/vim-airline') -- show current branch
    use('mfussenegger/nvim-lint') -- linting
 
-   use 'sbdchd/neoformat'
+   use 'sbdchd/neoformat' -- formatting
 
 end)
