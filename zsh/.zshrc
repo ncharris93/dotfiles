@@ -11,6 +11,17 @@ fi
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+# M1 react-native ios build
+export NODE_BINARY="$(which node)"
+
+export PATH=/opt/homebrew/bin:$PATH
+
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -143,3 +154,5 @@ export PATH="${HOME}/.pyenv/shims:${PATH}"
 
 # rbenv
 eval "$(rbenv init - zsh)"
+
+

@@ -65,12 +65,18 @@ return require('packer').startup(function(use)
    }
 
    use('preservim/nerdtree') -- dir manipulation
-   use('jiangmiao/auto-pairs') -- autocomplete autoclose pairs
+   use {
+	   "windwp/nvim-autopairs",
+      config = function() require("nvim-autopairs").setup {} end
+   }
 
    use('airblade/vim-gitgutter') -- git gutter icons
    use('vim-airline/vim-airline') -- show current branch
    use('mfussenegger/nvim-lint') -- linting
 
    use 'sbdchd/neoformat' -- formatting
+
+  -- use 'github/copilot.vim'
+   use 'mfussenegger/nvim-dap'
 
 end)
