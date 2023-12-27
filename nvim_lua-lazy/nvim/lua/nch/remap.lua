@@ -8,9 +8,6 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 -- keep J from going to EoL
 vim.keymap.set("n", "J", "mzJ`z")
 
--- keep jumping in the middle
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
 -- keep jump on search terms in the middle
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
