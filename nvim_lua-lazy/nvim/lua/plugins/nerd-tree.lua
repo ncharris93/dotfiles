@@ -15,11 +15,12 @@ return {
       {"vim-airline/vim-airline"}
     },
   },
- -- {
- --   "tiagofumo/vim-nerdtree-syntax-highlight",
- --   opts = {
- --     WebDevIconsDisableDefaultFolderSymbolColorFromNERDTreeDir = 1  
- --   }
- -- }
+  {
+    "tiagofumo/vim-nerdtree-syntax-highlight",
+    init = function()
+      vim.g.WebDevIconsDisableDefaultFolderSymbolColorFromNERDTreeDir = 1  
+      vim.g.WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
+    end
+  }
 
 }

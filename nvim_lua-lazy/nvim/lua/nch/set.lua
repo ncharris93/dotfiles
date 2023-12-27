@@ -21,7 +21,8 @@ vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = k
-vim.opt.clipboard:append("unnamedplus") -- allows interaction with clipboard
+--vim.opt.clipboard:append("unnamedplus") -- allows interaction with clipboard
+vim.opt.smartcase = true
 
 vim.opt.spell = true
 --font
@@ -33,4 +34,3 @@ vim.opt.incsearch = true
 
 
 vim.opt.updatetime = 50
-

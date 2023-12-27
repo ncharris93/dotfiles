@@ -18,7 +18,7 @@ require("lazy").setup({
   {import = "plugins"},
   {"airblade/vim-gitgutter"}, -- git gutter icons
   {"vim-airline/vim-airline"}, -- show current branch
-  {"psliwka/vim-smoothie"}, -- smooth scrolling
+  --{"psliwka/vim-smoothie"}, -- smooth scrolling
   {"Yggdroot/indentLine"}, -- line indenting
 })
 
