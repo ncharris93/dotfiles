@@ -18,7 +18,6 @@ require("lazy").setup({
   {import = "plugins"},
   {"airblade/vim-gitgutter"}, -- git gutter icons
   {"vim-airline/vim-airline"}, -- show current branch
-  {"JoosepAlviste/nvim-ts-context-commentstring"},
 })
 
 
