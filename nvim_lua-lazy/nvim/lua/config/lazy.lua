@@ -19,6 +19,7 @@ require("lazy").setup({
   {"airblade/vim-gitgutter"}, -- git gutter icons
   {"vim-airline/vim-airline"}, -- show current branch
   {"Yggdroot/indentLine"}, -- line indenting
+  {"tpope/vim-sleuth"}, -- auto-adjust widths
 })
 
 
