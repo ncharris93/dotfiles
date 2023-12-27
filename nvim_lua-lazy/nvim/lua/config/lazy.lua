@@ -15,7 +15,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  {import = "plugins"}
+  {import = "plugins"},
+  {"airblade/vim-gitgutter"}, -- git gutter icons
+  {"vim-airline/vim-airline"}, -- show current branch
+  {"JoosepAlviste/nvim-ts-context-commentstring"},
 })
 
 
