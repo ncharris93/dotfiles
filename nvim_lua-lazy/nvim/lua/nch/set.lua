@@ -23,6 +23,7 @@ vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = k
 --vim.opt.clipboard:append("unnamedplus") -- allows interaction with clipboard
 vim.opt.smartcase = true
+vim.opt.ignorecase = true
 
 vim.opt.spell = true
 --font
