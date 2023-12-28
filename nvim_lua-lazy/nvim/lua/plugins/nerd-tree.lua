@@ -8,6 +8,15 @@ return {
     }
   },
   --add dev icons TODO: remove boxes around icons?
+  -- {
+  --   "nvim-tree/nvim-web-devicons",
+  --  -- dependencies = {
+  --  --   {"preservim/nerdtree"},
+  --  --   {"vim-airline/vim-airline"}
+  --  -- },
+  --   --priority = 1, -- lowest
+  --   config = true
+  -- },
   {
     "ryanoasis/vim-devicons",
     dependencies = {
