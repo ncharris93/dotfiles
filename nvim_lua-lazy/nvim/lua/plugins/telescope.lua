@@ -11,7 +11,8 @@ return {
     },
     opts = {
       defaults = {
-        path_display = { "shorten" }
+        path_display = { "truncate" },
+        truncate = 3
       }
     }
 }

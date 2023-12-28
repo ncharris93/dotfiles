@@ -7,13 +7,14 @@ return {
       { "<C-f>","<cmd>NERDTreeFind<CR>"},
     }
   },
-  -- add dev icons TODO: remove boxes around icons?
+  --add dev icons TODO: remove boxes around icons?
   {
     "ryanoasis/vim-devicons",
     dependencies = {
       {"preservim/nerdtree"},
       {"vim-airline/vim-airline"}
     },
+    priority = 1, -- lowest
   },
   {
     "tiagofumo/vim-nerdtree-syntax-highlight",
