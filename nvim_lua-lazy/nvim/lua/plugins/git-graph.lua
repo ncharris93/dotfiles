@@ -7,7 +7,7 @@ return {
       "tpope/vim-fugitive",
     },
     keys = {
-      {"<leader>gg", "<cmd>Flogsplit<CR>"}
+      {"<leader>gg", "<cmd>Flogsplit<CR>", desc = "Git Graph"}
     }
   },
 }
