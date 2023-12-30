@@ -1,24 +1,24 @@
 return {
   {
-    'mhartington/formatter.nvim',
+    "stevearc/conform.nvim",
     config = function()
-      local formatter_prettier = { require('formatter.defaults.prettier') }
-      require("formatter").setup({
-        filetype = {
-          javascript      = formatter_prettier,
-          javascriptreact = formatter_prettier,
-          typescript      = formatter_prettier,
-          typescriptreact = formatter_prettier,
-        }
+      require("conform").setup({
+        formatters_by_ft = {
+          lua = { "stylua" },
+          -- Conform will run multiple formatters sequentially
+          python = { "isort", "black" },
+          -- Use a sub-list to run only the first available formatter
+          javascript = { { "prettierd", "prettier" } },
+          typescript = { { "prettierd", "prettier" } },
+          typescriptreact = { { "prettierd", "prettier" } },
+          javascriptreact = { { "prettierd", "prettier" } },
+        },
+        format_on_save = {
+          -- These options will be passed to conform.format()
+          timeout_ms = 500,
+          lsp_fallback = true,
+         },
       })
-      -- automatically format buffer before writing to disk:
-      vim.api.nvim_create_augroup('BufWritePreFormatter', {})
-      vim.api.nvim_create_autocmd('BufWritePre', {
-        command = 'FormatWrite',
-        group = 'BufWritePreFormatter',
-        pattern = { '*.js', '*.jsx', '*.ts', '*.tsx' },
-      })
-    end,
-    ft = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
- }
+    end
+  }
 }
