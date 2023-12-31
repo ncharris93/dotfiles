@@ -41,3 +41,7 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 -- run js files
 vim.keymap.set("n", "<leader>js", "<cmd>!node % <CR>" )
+
+-- fold current block
+vim.keymap.set("n", "<leader>fo", "viBzF<CR>" )
+
