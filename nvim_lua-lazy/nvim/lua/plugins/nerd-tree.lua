@@ -1,35 +1,27 @@
 return {
 	{
-		"preservim/nerdtree",
+		"nvim-tree/nvim-tree.lua",
+		lazy = false,
+		dependencies = {
+			{ "nvim-tree/nvim-web-devicons" },
+		},
+		config = {
+			filters = {
+				dotfiles = true,
+			},
+		},
 		keys = {
-			{ "<C-n>", "<cmd>NERDTree<CR>" },
-			{ "<C-t>", "<cmd>NERDTreeToggle<CR>" },
-			{ "<C-f>", "<cmd>NERDTreeFind<CR>" },
+			{ "<C-t>", "<cmd>NvimTreeToggle<CR>" },
+			{ "<C-f>", "<cmd>NvimTreeFindFile<CR>" },
 		},
 	},
-	--add dev icons TODO: remove boxes around icons?
 	{
-		"ryanoasis/vim-devicons",
+		"nvim-tree/nvim-web-devicons",
 		dependencies = {
-			{ "preservim/nerdtree" },
+			--{ "preservim/nerdtree" },
 			{ "vim-airline/vim-airline" },
 		},
 		priority = 1, -- lowest
+		config = true,
 	},
-	{
-		"tiagofumo/vim-nerdtree-syntax-highlight",
-		init = function()
-			vim.g.WebDevIconsDisableDefaultFolderSymbolColorFromNERDTreeDir = 1
-			vim.g.WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
-		end,
-	},
-	-- {
-	-- 	"nvim-tree/nvim-web-devicons",
-	-- 	dependencies = {
-	-- 		{ "preservim/nerdtree" },
-	-- 		{ "vim-airline/vim-airline" },
-	-- 	},
-	-- 	priority = 1, -- lowest
-	-- 	config = true,
-	-- },
 }
