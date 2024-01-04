@@ -38,20 +38,6 @@ return {
 							fallback()
 						end
 					end, { "i", "s" }),
-					-- ["<Tab>"] = cmp.mapping(function(fallback)
-					-- 	local copilot_keys = vim.fn["copilot#Accept"]()
-					-- 	if cmp.visible() then
-					-- 		cmp.select_next_item()
-					-- 		--cmp.confirm({ select = true })
-					-- 	elseif copilot_keys ~= "" and type(copilot_keys) == "string" then
-					-- 		vim.api.nvim_feedkeys(copilot_keys, "n", true)
-					-- 	else
-					-- 		fallback()
-					-- 	end
-					-- end, {
-					-- 	"i",
-					-- 	"s",
-					-- }),
 					["<S-Tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							cmp.select_prev_item()

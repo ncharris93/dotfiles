@@ -7,7 +7,12 @@ return {
 		},
 		config = {
 			filters = {
-				dotfiles = true,
+				dotfiles = false,
+			},
+			actions = {
+				open_file = {
+					quit_on_open = true,
+				},
 			},
 		},
 		keys = {
@@ -18,7 +23,6 @@ return {
 	{
 		"nvim-tree/nvim-web-devicons",
 		dependencies = {
-			--{ "preservim/nerdtree" },
 			{ "vim-airline/vim-airline" },
 		},
 		priority = 1, -- lowest
