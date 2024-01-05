@@ -1,12 +1,10 @@
 return {
 	{
-		"github/copilot.vim",
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "InsertEnter",
 		config = function()
 			require("copilot").setup({})
-		end,
-		init = function()
-			vim.g.copilot_no_tab_map = true
-			vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
 		end,
 	},
 }
