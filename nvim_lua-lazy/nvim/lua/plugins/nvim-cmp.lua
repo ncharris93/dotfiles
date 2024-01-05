@@ -32,19 +32,6 @@ return {
 					end,
 				},
 				mapping = cmp.mapping.preset.insert({
-					-- ["<Tab>"] = cmp.mapping(function(fallback)
-					--   local copilot_keys = vim.fn["copilot#Accept"]()
-					--   if cmp.visible() then
-					--       cmp.confirm({ select = true })
-					--   elseif copilot_keys ~= "" and type(copilot_keys) == "string" then
-					--       vim.api.nvim_feedkeys(copilot_keys, "n", true)
-					--   else
-					--       fallback()
-					--   end
-					-- end, {
-					--     "i",
-					--     "s",
-					-- }),
 					["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
 					["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
