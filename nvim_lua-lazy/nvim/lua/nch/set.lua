@@ -29,7 +29,6 @@ vim.opt.spell = true
 --font
 vim.opt.guifont = "Hack_Nerd_Font_Mono:h11"
 
-vim.opt.hlsearch = true
 vim.opt.incsearch = true
 
 vim.opt.updatetime = 50
