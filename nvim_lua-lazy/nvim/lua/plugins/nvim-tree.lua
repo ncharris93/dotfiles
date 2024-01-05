@@ -8,6 +8,7 @@ return {
 		config = {
 			filters = {
 				dotfiles = false,
+				custom = { ".DS_Store" },
 			},
 			actions = {
 				open_file = {
