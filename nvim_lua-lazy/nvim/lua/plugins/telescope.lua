@@ -3,33 +3,25 @@ return {
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.5",
 		dependencies = { "nvim-lua/plenary.nvim" },
-		init = function()
-			local builtin = require("telescope.builtin")
-
-			function vim.getVisualSelection()
-				vim.cmd('noau normal! "vy"')
-				local text = vim.fn.getreg("v")
-				vim.fn.setreg("v", {})
-
-				text = string.gsub(text, "\n", "")
-				if #text > 0 then
-					return text
-				else
-					return ""
-				end
-			end
-
-			vim.keymap.set("v", "<leader>ff", function()
-				local text = vim.getVisualSelection()
-				builtin.current_buffer_fuzzy_find({ default_text = text })
-			end)
-
-			vim.keymap.set("v", "<leader>fg", function()
-				local text = vim.getVisualSelection()
-				builtin.live_grep({ default_text = text })
-			end)
-		end,
 		keys = {
+			{
+				-- find word under cursor
+				"<leader>fw",
+				function()
+					local builtin = require("telescope.builtin")
+					local word = vim.fn.expand("<cword>")
+					builtin.grep_string({ search = word })
+				end,
+			},
+			-- find full word under cursor
+			{
+				"<leader>fW",
+				function()
+					local builtin = require("telescope.builtin")
+					local word = vim.fn.expand("<cWORD>")
+					builtin.grep_string({ search = word })
+				end,
+			},
 			{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "find files" },
 			{ "<leader>fgh", "<cmd>Telescope find_files hidden=true<cr>", desc = "find hidden" },
 			{ "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "grep" },
