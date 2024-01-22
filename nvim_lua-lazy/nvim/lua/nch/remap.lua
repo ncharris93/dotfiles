@@ -48,7 +48,32 @@ keymap.set("n", "<leader>js", "<cmd>!node % <CR>")
 keymap.set("n", "<leader>fo", "viBzF<CR>")
 
 -- Pane Navigation
-keymap.set("n", "<C-h>", "<C-w>h", opts)
-keymap.set("n", "<C-j>", "<C-w>j", opts)
-keymap.set("n", "<C-k>", "<C-w>k", opts)
-keymap.set("n", "<C-l>", "<C-w>l", opts)
+keymap.set("n", "<C-h>", "<C-w>h")
+keymap.set("n", "<C-j>", "<C-w>j")
+keymap.set("n", "<C-k>", "<C-w>k")
+keymap.set("n", "<C-l>", "<C-w>l")
+
+-- quickfix navigation
+keymap.set("n", "<C-]>", "<cmd>cn<CR>")
+keymap.set("n", "<C-[>", "<cmd>cp<CR>")
+
+-- Pane Resizing
+keymap.set("n", "<Leader>+", "<C-w>><CR>")
+keymap.set("n", "<Leader>-", "<C-w><<CR>")
+
+function ToggleVerbose()
+	local home = os.getenv("HOME")
+	local verbose_file = home .. "/.cache/nvim/verbose.log"
+
+	if vim.o.verbose == 0 then
+		print("verbose logging to " .. verbose_file)
+		vim.o.verbosefile = verbose_file
+		vim.o.verbose = 15
+	else
+		print("Verbose logging disabled")
+		vim.o.verbose = 0
+		vim.o.verbosefile = ""
+	end
+end
+
+keymap.set("n", "<leader>tv", ":lua ToggleVerbose()<CR>", { silent = true, noremap = true })

@@ -18,11 +18,13 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 require("lazy").setup({
+	{ "LazyVim/LazyVim" },
 	{ import = "plugins" },
-	{ import = "lazyvim.plugins.extras.dap.core" },
+	--	{ import = "lazyvim.plugins.extras.dap.core" },
 	{ "airblade/vim-gitgutter" }, -- git gutter icons
 	{ "vim-airline/vim-airline" }, -- show current branch
 	{ "Yggdroot/indentLine" }, -- line indenting
 	{ "tpope/vim-sleuth" }, -- auto-adjust widths
 	{ "folke/neodev.nvim", opts = {} }, -- vim lua cmp
+	change_detection = { notify = false },
 })

@@ -13,7 +13,7 @@ vim.opt.termguicolors = true
 vim.opt.relativenumber = true
 vim.opt.colorcolumn = "80"
 vim.opt.signcolumn = "yes"
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 12
 vim.opt.completeopt = "menuone,noinsert,noselect"
 
 --behavior
@@ -30,5 +30,4 @@ vim.opt.spell = true
 vim.opt.guifont = "Hack_Nerd_Font_Mono:h11"
 
 vim.opt.incsearch = true
-
 vim.opt.updatetime = 50

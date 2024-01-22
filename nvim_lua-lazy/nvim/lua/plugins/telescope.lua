@@ -22,12 +22,20 @@ return {
 					builtin.grep_string({ search = word })
 				end,
 			},
+			{
+				"<leader>fr",
+				function()
+					local builtin = require("telescope.builtin")
+					local word = vim.fn.expand("<cWORD>")
+					builtin.lsp_references({ search = word })
+				end,
+			},
 			{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "find files" },
 			{ "<leader>fgh", "<cmd>Telescope find_files hidden=true<cr>", desc = "find hidden" },
 			{ "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "grep" },
-			{ "<leader>fb", "<cmd>Telescope buffers<cr>" },
-			{ "<leader>fh", "<cmd>Telescope help_tags<cr>" },
-			{ "<leader><C-p>", "<cmd>Telescope git_files<cr>" },
+			{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "find buffers" },
+			{ "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "find help tags" },
+			{ "<leader><C-p>", "<cmd>Telescope git_files<cr>", desc = "find git files" },
 		},
 		opts = {
 			defaults = {

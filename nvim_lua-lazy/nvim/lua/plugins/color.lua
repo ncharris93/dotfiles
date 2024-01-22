@@ -1,21 +1,24 @@
 return {
-  {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {
-      transparent = true
-    },
-    -- allows setting for theme without importing LazyVim defaults?
-    -- config = function()
-    --   vim.cmd([[colorscheme tokyonight-night]])
-    -- end
-  },
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "tokyonight-night",
-    },
-  }
-}
+	{
+		{
+			"folke/tokyonight.nvim",
+			lazy = false,
+			priority = 1000,
+			config = function()
+				require("tokyonight").setup({
+					transparent = true,
+					day_brightness = 0.5,
+				})
+				-- Apply the tokyonight theme settings
+				vim.g.tokyonight_transparent = true
+				vim.cmd([[colorscheme tokyonight]])
 
+				-- Custom highlight settings for line numbers
+				vim.cmd([[
+          highlight LineNr guifg=#7aa2f7
+          highlight CursorLineNr guifg=#7aa2f7
+        ]])
+			end,
+		},
+	},
+}
