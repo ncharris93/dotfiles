@@ -112,6 +112,8 @@ plugins=(
 
   zsh-autosuggestions
   zsh-syntax-highlighting
+
+  zsh-cargo-completion
 )
 
 source $ZSH/oh-my-zsh.sh
