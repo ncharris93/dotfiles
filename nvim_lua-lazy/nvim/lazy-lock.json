@@ -39,6 +39,7 @@
   "trouble.nvim": { "branch": "main", "commit": "f1168feada93c0154ede4d1fe9183bf69bac54ea" },
   "undotree": { "branch": "master", "commit": "d9c8b4ef872e078e8c4080812e5a3ed56d151c00" },
   "vim-airline": { "branch": "master", "commit": "ff7352e4bff02eb600a136b6fd741404f3195371" },
+  "vim-floaterm": { "branch": "master", "commit": "97c085b2f69e931ed78bb1c260512d1e0492a754" },
   "vim-flog": { "branch": "master", "commit": "bb1fda0cac110aef3f1c0ac00be813377b2b9bf0" },
   "vim-fugitive": { "branch": "master", "commit": "854a8df0d06b8d3fcb30fa7f2b08c62b553eee3b" },
   "vim-gitgutter": { "branch": "main", "commit": "67ef116100b40f9ca128196504a2e0bc0a2753b0" },
