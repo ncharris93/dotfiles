@@ -23,7 +23,7 @@ require("lazy").setup({
 	--	{ import = "lazyvim.plugins.extras.dap.core" },
 	{ "airblade/vim-gitgutter" }, -- git gutter icons
 	{ "vim-airline/vim-airline" }, -- show current branch
-	{ "Yggdroot/indentLine" }, -- line indenting
+	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} }, -- line indenting
 	{ "tpope/vim-sleuth" }, -- auto-adjust widths
 	{ "folke/neodev.nvim", opts = {} }, -- vim lua cmp
 	change_detection = { notify = false },
