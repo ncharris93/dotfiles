@@ -19,6 +19,8 @@ return {
 		keys = {
 			{ "<C-t>", "<cmd>NvimTreeToggle<CR>" },
 			{ "<C-f>", "<cmd>NvimTreeFindFile<CR>" },
+			{ "<C-+>", "<cmd>NvimTreeResize +20" },
+			{ "<C-->", "<cmd>NvimTreeResize -20" },
 		},
 	},
 	{

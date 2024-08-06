@@ -56,22 +56,5 @@ keymap.set("n", "<C-]>", "<cmd>cn<CR>")
 keymap.set("n", "<C-[>", "<cmd>cp<CR>")
 
 -- Pane Resizing
-keymap.set("n", "<Leader>+", "<C-w>><CR>")
-keymap.set("n", "<Leader>-", "<C-w><<CR>")
-
-function ToggleVerbose()
-	local home = os.getenv("HOME")
-	local verbose_file = home .. "/.cache/nvim/verbose.log"
-
-	if vim.o.verbose == 0 then
-		print("verbose logging to " .. verbose_file)
-		vim.o.verbosefile = verbose_file
-		vim.o.verbose = 15
-	else
-		print("Verbose logging disabled")
-		vim.o.verbose = 0
-		vim.o.verbosefile = ""
-	end
-end
-
-keymap.set("n", "<leader>tv", ":lua ToggleVerbose()<CR>", { silent = true, noremap = true })
+--keymap.set("n", "<Leader>+", "<C-w>><CR>")
+--keymap.set("n", "<Leader>-", "<C-w><<CR>")
