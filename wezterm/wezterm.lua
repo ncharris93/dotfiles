@@ -1,14 +1,17 @@
 -- Import the wezterm module
 local wezterm = require("wezterm")
 local appearance = require("appearance")
+
 -- Creates a config object which we will be adding our config to
 local config = wezterm.config_builder()
+config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 
 -- + (This is where our config will go)
 if appearance.is_dark() then
 	config.color_scheme = "Tokyo Night"
 else
-	config.color_scheme = "Tokyo Night Day"
+	config.color_scheme = "Tokyo Night"
+	--config.color_scheme = "Atelier Dune Light (base16)"
 end
 
 config.font = wezterm.font({ family = "FiraCode Nerd Font Mono" })
@@ -27,6 +30,15 @@ local function resize_pane(key, direction)
 end
 
 config.keys = {
+	{ key = "RightArrow", mods = "OPT", action = wezterm.action.SendString("\x1bf") },
+	{ key = '"', mods = "LEADER", action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+	{ key = "%", mods = "LEADER", action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
+	{ key = "x", mods = "LEADER", action = wezterm.action.CloseCurrentPane({ confirm = false }) },
+	-- vim-like pane switching
+	{ key = "j", mods = "LEADER", action = wezterm.action.ActivatePaneDirection("Down") },
+	{ key = "k", mods = "LEADER", action = wezterm.action.ActivatePaneDirection("Up") },
+	{ key = "h", mods = "LEADER", action = wezterm.action.ActivatePaneDirection("Left") },
+	{ key = "l", mods = "LEADER", action = wezterm.action.ActivatePaneDirection("Right") },
 	{
 		-- When the left arrow is pressed
 		key = "LeftArrow",
@@ -37,11 +49,6 @@ config.keys = {
 		action = wezterm.action.SendString("\x1bb"),
 	},
 	{
-		key = "RightArrow",
-		mods = "OPT",
-		action = wezterm.action.SendString("\x1bf"),
-	},
-	{
 		-- open wezterm config in nvim when cmd + , is pressed
 		key = ",",
 		mods = "SUPER",
@@ -49,27 +56,6 @@ config.keys = {
 			cwd = wezterm.home_dir,
 			args = { "nvim", wezterm.config_file },
 		}),
-	},
-	{
-		-- I'm used to tmux bindings, so am using the quotes (") key to
-		-- split horizontally, and the percent (%) key to split vertically.
-		key = '"',
-		-- Note that instead of a key modifier mapped to a key on your keyboard
-		-- like CTRL or ALT, we can use the LEADER modifier instead.
-		-- This means that this binding will be invoked when you press the leader
-		-- (CTRL + A), quickly followed by quotes (").
-		mods = "LEADER",
-		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
-	},
-	{
-		key = "%",
-		mods = "LEADER",
-		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
-	},
-	{
-		key = "x",
-		mods = "LEADER",
-		action = wezterm.action.CloseCurrentPane({ confirm = false }),
 	},
 	{
 		-- When we push LEADER + R...
@@ -123,8 +109,6 @@ wezterm.on("update-status", function(window)
 		{ Text = " " .. wezterm.hostname() .. " " },
 	}))
 end)
-
-config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 
 -- Returns our config to be evaluated. We must always do this at the bottom of this file
 return config
