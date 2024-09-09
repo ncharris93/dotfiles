@@ -11,7 +11,7 @@ if appearance.is_dark() then
 	config.color_scheme = "Tokyo Night"
 else
 	config.color_scheme = "Tokyo Night"
-	--config.color_scheme = "Atelier Dune Light (base16)"
+	--config.color_scheme = "Gruvbox light, soft (base16)"
 end
 
 config.font = wezterm.font({ family = "FiraCode Nerd Font Mono" })
@@ -21,6 +21,8 @@ config.window_background_opacity = 0.9
 config.macos_window_background_blur = 30
 
 config.window_decorations = "INTEGRATED_BUTTONS"
+
+config.adjust_window_size_when_changing_font_size = false
 
 local function resize_pane(key, direction)
 	return {
