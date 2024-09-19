@@ -1,27 +1,27 @@
 return {
 	"folke/trouble.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
-	config = true,
+	config = {},
 	keys = {
 		{
 			"<leader>tt",
-			function()
-				require("trouble").toggle()
-			end,
+			"<cmd>Trouble diagnostics toggle<cr>",
 			desc = "toggle issue buffer",
 		},
 		{
 			"<leader>tn",
-			function()
-				require("trouble").next({ skip_groups = true, jump = true })
-			end,
+			"<cmd>Trouble diagnostics next = {skip_groups = true, jump=true}<cr>",
+			-- function()
+			-- 	require("trouble").next({ skip_groups = true, jump = true })
+			-- end,
 			desc = "trouble - next issue",
 		},
 		{
 			"<leader>tp",
-			function()
-				require("trouble").previous({ skip_groups = true, jump = true })
-			end,
+			"<cmd>Trouble diagnostics previous<cr>",
+			-- function()
+			-- 	require("trouble").previous({ skip_groups = true, jump = true })
+			-- end,
 			desc = "trouble - next issue",
 		},
 	},
