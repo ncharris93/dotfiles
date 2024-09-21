@@ -95,6 +95,8 @@ plugins=(
   heroku
   yarn
   dotenv
+  docker
+  docker-compose
   macos
   fzf
   iterm2
@@ -179,3 +181,5 @@ fi
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
+# postgres
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
