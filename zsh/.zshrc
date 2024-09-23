@@ -94,7 +94,6 @@ plugins=(
   brew
   heroku
   yarn
-  dotenv
   docker
   docker-compose
   macos
@@ -183,3 +182,7 @@ load-nvmrc
 
 # postgres
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+# Go
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
