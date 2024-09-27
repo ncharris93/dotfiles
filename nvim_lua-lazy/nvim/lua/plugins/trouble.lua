@@ -11,17 +11,17 @@ return {
 		{
 			"<leader>tn",
 			"<cmd>Trouble diagnostics next = {skip_groups = true, jump=true}<cr>",
-			-- function()
-			-- 	require("trouble").next({ skip_groups = true, jump = true })
-			-- end,
+			function()
+				require("trouble").next({ skip_groups = true, jump = true })
+			end,
 			desc = "trouble - next issue",
 		},
 		{
 			"<leader>tp",
 			"<cmd>Trouble diagnostics previous<cr>",
-			-- function()
-			-- 	require("trouble").previous({ skip_groups = true, jump = true })
-			-- end,
+			function()
+				require("trouble").previous({ skip_groups = true, jump = true })
+			end,
 			desc = "trouble - next issue",
 		},
 	},
