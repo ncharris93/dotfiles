@@ -32,7 +32,9 @@ local function resize_pane(key, direction)
 end
 
 config.keys = {
+	-- word jump in the terminal
 	{ key = "RightArrow", mods = "OPT", action = wezterm.action.SendString("\x1bf") },
+	-- tmux
 	{ key = '"', mods = "LEADER", action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 	{ key = "%", mods = "LEADER", action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
 	{ key = "x", mods = "LEADER", action = wezterm.action.CloseCurrentPane({ confirm = false }) },
