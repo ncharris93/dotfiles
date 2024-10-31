@@ -29,13 +29,13 @@ keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 keymap.set("i", "<C-c>", "<Esc>")
 
 keymap.set("n", "Q", "<nop>")
-keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+-- keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
-keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
-keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "next location list item" })
+keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "previous location list item" })
 
-keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "search and replace" })
 keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 -- run js files
@@ -43,7 +43,7 @@ keymap.set("n", "<leader>ts", "<cmd>!ts-node % <CR>")
 keymap.set("n", "<leader>js", "<cmd>!node % <CR>")
 
 -- fold current block
-keymap.set("n", "<leader>fo", "viBzF<CR>")
+keymap.set("n", "<leader>fo", "viBzF<CR>", { desc = "fold current block" })
 
 -- Pane Navigation
 keymap.set("n", "<C-h>", "<C-w>h")

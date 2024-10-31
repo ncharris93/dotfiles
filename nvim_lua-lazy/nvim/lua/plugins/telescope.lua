@@ -12,6 +12,7 @@ return {
 					local word = vim.fn.expand("<cword>")
 					builtin.grep_string({ search = word })
 				end,
+				desc = "find word under cursor",
 			},
 			-- find full word under cursor
 			{
@@ -21,6 +22,7 @@ return {
 					local word = vim.fn.expand("<cWORD>")
 					builtin.grep_string({ search = word })
 				end,
+				desc = "find full word under cursor",
 			},
 			{
 				"<leader>fr",
@@ -29,6 +31,7 @@ return {
 					local word = vim.fn.expand("<cWORD>")
 					builtin.lsp_references({ search = word })
 				end,
+				desc = "find references",
 			},
 			{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "find files" },
 			{ "<leader>fgh", "<cmd>Telescope find_files hidden=true<cr>", desc = "find hidden" },
