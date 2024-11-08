@@ -243,7 +243,11 @@ return {
 			-- Fix the issue with diagnostic
 			{ "<leader>ccf", "<cmd>CopilotChatFixDiagnostic<cr>", desc = "CopilotChat - Fix Diagnostic" },
 			-- Clear buffer and chat history
-			{ "<leader>ccl", "<cmd>CopilotChatReset<cr>", desc = "CopilotChat - Clear buffer and chat history" },
+			{
+				"<leader>ccl",
+				"<cmd>CopilotChatReset<cr>",
+				desc = "CopilotChat - Clear buffer and chat history",
+			},
 			-- Toggle Copilot Chat Vsplit
 			{ "<leader>ccv", "<cmd>CopilotChatToggle<cr>", desc = "CopilotChat - Toggle" },
 			-- Copilot Chat Models
