@@ -35,22 +35,6 @@ return {
 			})
 		end,
 	},
-	--{ import = "plugins.extras.copilot-vim" }, -- Or use { import = "lazyvim.plugins.extras.coding.copilot" },
-	-- {
-	-- 	"folke/which-key.nvim",
-	-- 	optional = true,
-	-- 	opts = {
-	-- 		spec = {
-	-- 			{ "<leader>cc", group = "ai" },
-	-- 			{ "gm", group = "+Copilot chat" },
-	-- 			{ "gmh", desc = "Show help" },
-	-- 			{ "gmd", desc = "Show diff" },
-	-- 			{ "gmp", desc = "Show system prompt" },
-	-- 			{ "gms", desc = "Show selection" },
-	-- 			{ "gmy", desc = "Yank diff" },
-	-- 		},
-	-- 	},
-	-- },
 	{
 		dir = IS_DEV and "~/Projects/research/CopilotChat.nvim" or nil,
 		"CopilotC-Nvim/CopilotChat.nvim",
@@ -75,10 +59,10 @@ return {
 					insert = "<Tab>",
 				},
 				-- Close the chat
-				close = {
-					normal = "q",
-					insert = "<C-c>",
-				},
+				-- close = {
+				-- 	normal = "q",
+				-- 	insert = "<C-c>",
+				-- },
 				-- Reset the chat buffer
 				reset = {
 					normal = "<C-x>",
@@ -266,95 +250,4 @@ return {
 			{ "<leader>cc?", "<cmd>CopilotChatModels<cr>", desc = "CopilotChat - Select Models" },
 		},
 	},
-	-- {
-	-- 	"CopilotC-Nvim/CopilotChat.nvim",
-	-- 	branch = "canary",
-	-- 	dependencies = {
-	-- 		{ "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-	-- 		{ "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
-	-- 	},
-	-- 	build = "make tiktoken", -- Only on MacOS or Linux
-	-- 	opts = {
-	-- 		debug = false, -- Enable debugging
-	-- 		-- See Configuration section for rest
-	-- 	},
-	-- 	keys = {
-	-- 		{ "<leader>cce", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
-	-- 		{ "<leader>cct", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
-	-- 		{
-	-- 			"<leader>ccT",
-	-- 			"<cmd>CopilotChatToggle<cr>",
-	-- 			desc = "CopilotChat - Toggle Vsplit", -- Toggle vertical split
-	-- 		},
-	-- 		{
-	-- 			"<leader>ccv",
-	-- 			":CopilotChatVisual",
-	-- 			mode = "x",
-	-- 			desc = "CopilotChat - Open in vertical split",
-	-- 		},
-	-- 		{
-	-- 			"<leader>ccx",
-	-- 			":CopilotChatInPlace<cr>",
-	-- 			mode = "x",
-	-- 			desc = "CopilotChat - Run in-place code",
-	-- 		},
-	-- 		{
-	-- 			"<leader>ccf",
-	-- 			"<cmd>CopilotChatFixDiagnostic<cr>", -- Get a fix for the diagnostic message under the cursor.
-	-- 			desc = "CopilotChat - Fix diagnostic",
-	-- 		},
-	-- 		{
-	-- 			"<leader>ccr",
-	-- 			"<cmd>CopilotChatReset<cr>", -- Reset chat history and clear buffer.
-	-- 			desc = "CopilotChat - Reset chat history and clear buffer",
-	-- 		},
-	-- 	},
-	-- 	-- See Commands section for default commands if you want to lazy load on them
-	-- },
-	-- {
-	-- 	"CopilotC-Nvim/CopilotChat.nvim",
-	-- 	opts = {
-	-- 		show_help = "yes", -- Show help text for CopilotChatInPlace, default: yes
-	-- 		debug = false, -- Enable or disable debug mode, the log file will be in ~/.local/state/nvim/CopilotChat.nvim.log
-	-- 		disable_extra_info = "no", -- Disable extra information (e.g: system prompt) in the response.
-	-- 		language = "English", -- Copilot answer language settings when using default prompts. Default language is English.
-	-- 		-- proxy = "socks5://127.0.0.1:3000", -- Proxies requests via https or socks.
-	-- 		-- temperature = 0.1,
-	-- 	},
-	-- 	build = function()
-	-- 		vim.notify("Please update the remote plugins by running ':UpdateRemotePlugins', then restart Neovim.")
-	-- 	end,
-	-- 	event = "VeryLazy",
-	-- 	keys = {
-	-- 		{ "<leader>cce", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
-	-- 		{ "<leader>cct", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
-	-- 		{
-	-- 			"<leader>ccT",
-	-- 			"<cmd>CopilotChatVsplitToggle<cr>",
-	-- 			desc = "CopilotChat - Toggle Vsplit", -- Toggle vertical split
-	-- 		},
-	-- 		{
-	-- 			"<leader>ccv",
-	-- 			":CopilotChatVisual",
-	-- 			mode = "x",
-	-- 			desc = "CopilotChat - Open in vertical split",
-	-- 		},
-	-- 		{
-	-- 			"<leader>ccx",
-	-- 			":CopilotChatInPlace<cr>",
-	-- 			mode = "x",
-	-- 			desc = "CopilotChat - Run in-place code",
-	-- 		},
-	-- 		{
-	-- 			"<leader>ccf",
-	-- 			"<cmd>CopilotChatFixDiagnostic<cr>", -- Get a fix for the diagnostic message under the cursor.
-	-- 			desc = "CopilotChat - Fix diagnostic",
-	-- 		},
-	-- 		{
-	-- 			"<leader>ccr",
-	-- 			"<cmd>CopilotChatReset<cr>", -- Reset chat history and clear buffer.
-	-- 			desc = "CopilotChat - Reset chat history and clear buffer",
-	-- 		},
-	-- 	},
-	-- },
 }
