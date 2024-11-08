@@ -26,5 +26,6 @@ require("lazy").setup({
 	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} }, -- line indenting
 	{ "tpope/vim-sleuth" }, -- auto-adjust widths
 	{ "folke/neodev.nvim", opts = {} }, -- vim lua cmp
+	{ "tpope/vim-surround" },
 	change_detection = { notify = false },
 })
