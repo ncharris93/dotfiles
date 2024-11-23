@@ -31,3 +31,6 @@ vim.opt.guifont = "Hack_Nerd_Font_Mono:h11"
 
 vim.opt.incsearch = true
 vim.opt.updatetime = 50
+
+vim.opt.autoindent = true
+vim.opt.smartindent = true
