@@ -34,8 +34,9 @@ return {
 				desc = "find references",
 			},
 			{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "find files" },
-			{ "<leader>fgh", "<cmd>Telescope find_files hidden=true<cr>", desc = "find hidden" },
+			{ "<leader>ffh", "<cmd>Telescope find_files hidden=true<cr>", desc = "find hidden" },
 			{ "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "grep" },
+			{ "<leader>fgb", "<cmd>Telescope git_branches<cr>", desc = "git branches" },
 			{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "find buffers" },
 			{ "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "find help tags" },
 			{ "<leader><C-p>", "<cmd>Telescope git_files<cr>", desc = "find git files" },
@@ -44,6 +45,19 @@ return {
 			defaults = {
 				path_display = { "truncate" },
 				truncate = 3,
+				-- pickers = {
+				-- 	find_files = {
+				-- 		find_command = {
+				-- 			"rg",
+				-- 			"--sortr=modified",
+				-- 			"--files",
+				-- 			"--hidden",
+				-- 			"--no-ignore",
+				-- 			"--glob",
+				-- 			"!.git",
+				-- 		},
+				-- 	},
+				-- },
 			},
 		},
 	},
