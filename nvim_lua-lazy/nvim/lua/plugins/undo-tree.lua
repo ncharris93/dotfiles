@@ -1,6 +1,6 @@
 return {
 	"mbbill/undotree",
-	config = {
+	opts = {
 		undodir = "~/.undotree",
 	},
 	keys = {

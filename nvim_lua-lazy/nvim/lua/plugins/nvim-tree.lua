@@ -5,7 +5,7 @@ return {
 		dependencies = {
 			{ "nvim-tree/nvim-web-devicons" },
 		},
-		config = {
+		opts = {
 			filters = {
 				dotfiles = false,
 				custom = { ".DS_Store" },

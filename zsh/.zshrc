@@ -148,6 +148,8 @@ source $ZSH/oh-my-zsh.sh
  alias dc-="docker compose up -d"
  alias dcd="docker compose down"
  alias dcr="docker compose restart"
+ alias v="nvim ."
+ alias vv="nvim ~/.config/nvim"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
