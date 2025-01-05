@@ -13,6 +13,7 @@ return {
 			require("nvim-treesitter.query_predicates")
 		end,
 		dependencies = {
+			{ "tree-sitter-grammars/tree-sitter-hcl" },
 			{
 				"nvim-treesitter/nvim-treesitter-textobjects",
 				config = function()
@@ -65,6 +66,7 @@ return {
 				"bash",
 				"c",
 				"diff",
+				"hcl",
 				"html",
 				"javascript",
 				"jsdoc",
