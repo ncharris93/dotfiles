@@ -41,7 +41,7 @@ return {
 			})
 
 			require("mason-lspconfig").setup({
-				ensure_installed = { "ts_ls", "jsonls", "html", "cssls", "lua_ls", "volar" },
+				ensure_installed = { "ts_ls", "jsonls", "html", "cssls", "lua_ls" },
 				handlers = {
 					function(server)
 						local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -97,11 +97,13 @@ return {
 			})
 
 			-- Vue 3 setup
-			require("lspconfig").volar.setup({})
+			--require("lspconfig").volar.setup({})
 			require("lspconfig").docker_compose_language_service.setup({})
 
 			require("lspconfig").ts_ls.setup({
 				filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
+				capabilities = require("cmp_nvim_lsp").default_capabilities(),
+				root_dir = require("lspconfig.util").root_pattern("package.json", "tsconfig.json", ".git"),
 				init_options = {
 					preferences = {
 						importModuleSpecifierPreference = "relative",
@@ -137,7 +139,9 @@ return {
 			cmp.setup.cmdline(":", {
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = cmp.config.sources({
+					{ name = "nvim_lsp" }, -- LSP suggestions first
 					{ name = "path" },
+					{ name = "luasnip" },
 				}, {
 					{ name = "cmdline" },
 				}),
