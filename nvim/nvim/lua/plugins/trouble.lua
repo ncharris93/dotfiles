@@ -24,5 +24,10 @@ return {
 			end,
 			desc = "trouble - next issue",
 		},
+		{
+			"<leader>tQ",
+			"<cmd>Trouble qflist toggle<cr>",
+			desc = "Quickfix List (Trouble)",
+		},
 	},
 }
