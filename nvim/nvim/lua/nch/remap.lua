@@ -58,3 +58,16 @@ keymap.set("n", "<C-[>", "<cmd>cp<CR>")
 -- Pane Resizing
 --keymap.set("n", "<Leader>+", "<C-w>><CR>")
 --keymap.set("n", "<Leader>-", "<C-w><<CR>")
+
+-- reload the config
+vim.keymap.set("n", "<leader>rr", function()
+	-- Clear and reset require cache
+	for name, _ in pairs(package.loaded) do
+		if name:match("^plugins") or name:match("^nch") or name:match("^config") then
+			package.loaded[name] = nil
+		end
+	end
+	-- Source init.lua
+	vim.cmd("source $MYVIMRC")
+	vim.notify("Neovim config reloaded!", vim.log.levels.INFO)
+end, { desc = "Reload nvim config" })
