@@ -45,22 +45,7 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git
-  brew
-  yarn
-  docker
-  macos
   fzf
-  man
-  node
-  nvm
-  brew
-  pip
-  pyenv
-  python
-  react-native
-  rust
-  zsh-cargo-completion
 
   zsh-autosuggestions
   zsh-syntax-highlighting
@@ -91,10 +76,16 @@ fi
 alias dcu="docker compose up"
 alias dc-="docker compose up -d"
 alias dcd="docker compose down"
+alias dcdv="docker compose down -v"
 alias dcr="docker compose restart"
+alias dcl="docker compose logs -f"
+
 alias v="nvim ."
 alias vv="nvim ~/.config/nvim"
+alias vz="nvim ~/.zshrc && source ~/.zshrc"
 
+alias gmi="go mod init"
+alias j="jq '.scripts' package.json"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 source ~/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
