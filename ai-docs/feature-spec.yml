@@ -1,0 +1,55 @@
+metadata:
+  story: 'User story description'
+  priority: 'P0/P1/P2'
+
+analysis:
+  frontend:
+    root_causes: []
+    proposed_solutions: []
+    implementation_approach: ''
+    dependencies: []
+
+  backend:
+    root_causes: []
+    api_changes: []
+    data_model_changes: []
+    performance_considerations: []
+
+  security:
+    vulnerability_assessment: []
+    security_requirements: []
+    compliance_considerations: []
+
+  quality:
+    testing_strategy: []
+    quality_gates: []
+    risk_assessment: []
+
+  data:
+    metrics_to_track: []
+    monitoring_requirements: []
+    success_criteria: []
+
+  product:
+    business_impact: ''
+    success_metrics: []
+    user_experience: ''
+
+implementation:
+  architecture:
+    component_design: ''
+    data_flow: ''
+    integration_points: []
+
+  detailed_tasks:
+    - id: 'task-1'
+      owner: 'frontend'
+      description: ''
+      acceptance_criteria: []
+      dependencies: []
+      code_spec: ''
+
+deployment:
+  phases: []
+  rollback_plan: ''
+  monitoring: []
