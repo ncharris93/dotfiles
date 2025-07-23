@@ -8,8 +8,14 @@ initial_request: $ARGUMENTS
 
 ## Context Persistence
 
-Store epic-specific context for use in subsequent commands:
+Store project-wide and epic-specific context for use in subsequent commands:
 
+**Root context (project-wide meta documents):**
+```bash
+echo "META_DOCS=[comma-separated-list-of-meta-doc-paths]" > ./.project-context
+```
+
+**Epic-specific context:**
 ```bash
 echo "PROJECT_TYPE=$PROJECT_TYPE" > "$DOCS_PATH/[epic-name]/.project-context"
 echo "DOCS_PATH=$DOCS_PATH" >> "$DOCS_PATH/[epic-name]/.project-context"
@@ -20,9 +26,10 @@ echo "EPIC_PATH=$DOCS_PATH/[epic-name]/epic.md" >> "$DOCS_PATH/[epic-name]/.proj
 
 ## Phase 1: Initial Understanding
 
-First, determine the project type:
+First, determine the project type and meta documentation:
 - "Is this an MVP, POC, enterprise feature, or something else?"
 - "What are the primary constraints (time, resources, quality)?"
+- "What meta documents should inform this project's planning and implementation? (e.g., architecture docs, coding standards, testing strategies, etc.)"
 
 Then engage in collaborative dialogue to understand:
 

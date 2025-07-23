@@ -32,7 +32,8 @@ The workflow consists of 5 numbered commands that build upon each other:
 **Output**: 
 - `./project-management/[epic-name]/requirements.md`
 - `./project-management/[epic-name]/` folder structure with status subfolders
-- `./project-management/[epic-name]/.project-context` file with all context
+- Root `.project-context` file with meta documents configuration
+- `./project-management/[epic-name]/.project-context` file with epic-specific context
 
 **Next**: Automatically suggests `/2-epic-planning`
 
@@ -116,7 +117,10 @@ The workflow consists of 5 numbered commands that build upon each other:
 
 ## Context Management
 
-Each epic maintains its own isolated `.project-context` file in its folder:
+The workflow uses a dual-context approach for maximum flexibility:
+
+**Root `.project-context` (project-wide meta documents):**
+- `META_DOCS`: Comma-separated list of meta document paths to load for context
 
 **Epic-specific `.project-context` (per epic folder):**
 - `PROJECT_TYPE`: MVP, POC, Enterprise, etc.
@@ -127,7 +131,26 @@ Each epic maintains its own isolated `.project-context` file in its folder:
 - `LAST_IMPLEMENTED_TASK`: Most recent task implementation
 - `LAST_IMPLEMENTED_FEATURE`: Most recent feature implementation
 
-This approach ensures complete epic isolation with no shared state between epics.
+This approach ensures epic isolation while allowing project-wide meta document integration.
+
+## Meta Document Configuration
+
+When starting a new project, configure meta documents in command 1:
+
+**Example configurations:**
+
+```bash
+# Standard ai-docs structure
+META_DOCS=./ai-docs/strategies/code-style-strategy.md,./ai-docs/strategies/testing-strategy.md,./ai-docs/strategies/logging-strategy.md
+
+# With architecture documentation
+META_DOCS=./ai-docs/strategies/code-style-strategy.md,./ai-docs/strategies/testing-strategy.md,./ai-docs/context/architecture.md
+
+# Custom project structure
+META_DOCS=./docs/engineering-standards.md,./docs/api-guidelines.md,./compliance/security-requirements.md
+```
+
+All commands automatically load these documents for context, ensuring consistent implementation across all epics.
 
 ## Best Practices
 

@@ -9,10 +9,17 @@ additional_context: $ARGUMENTS
 ## Context Loading
 
 ```bash
+# Load project context (meta documents)
+source ./.project-context
+# This provides: META_DOCS
+
 # Load epic-specific context from previous step
 source "$DOCS_PATH/[epic-name]/.project-context"
 # This provides: PROJECT_TYPE, DOCS_PATH, EPIC_NAME, REQUIREMENTS_PATH, EPIC_PATH
 ```
+
+**Load context from the following files before beginning:**
+(Read all files listed in $META_DOCS for comprehensive project context)
 
 ## Pre-Meeting Setup
 
