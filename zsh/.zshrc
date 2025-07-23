@@ -119,3 +119,14 @@ export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+# Theme switching functions
+theme_dark() {
+  echo "dark" > ~/.theme-mode
+  echo "Switched to dark theme. Press F5 in wezterm to reload config."
+}
+
+theme_light() {
+  echo "light" > ~/.theme-mode
+  echo "Switched to light theme. Press F5 in wezterm to reload config."
+}

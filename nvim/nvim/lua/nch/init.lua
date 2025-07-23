@@ -15,3 +15,11 @@ autocmd("TextYankPost", {
 		})
 	end,
 })
+
+-- Initialize theme switcher after all plugins are loaded
+autocmd("VimEnter", {
+	callback = function()
+		local theme_switcher = require("nch.theme-switcher")
+		theme_switcher.init()
+	end,
+})

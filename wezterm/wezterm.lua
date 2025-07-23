@@ -7,11 +7,29 @@ local config = wezterm.config_builder()
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 
 -- + (This is where our config will go)
-if appearance.is_dark() then
+local function read_theme_mode()
+	local theme_file = wezterm.home_dir .. "/.theme-mode"
+	local file = io.open(theme_file, "r")
+	if file then
+		local content = file:read("*all"):gsub("%s+", "")
+		file:close()
+		return content
+	end
+	return nil
+end
+
+local theme_mode = read_theme_mode()
+if theme_mode == "light" then
+	config.color_scheme = "Catppuccin Latte"
+elseif theme_mode == "dark" then
 	config.color_scheme = "Tokyo Night"
 else
-	config.color_scheme = "Tokyo Night"
-	--config.color_scheme = "Gruvbox light, soft (base16)"
+	-- Fallback to system appearance
+	if appearance.is_dark() then
+		config.color_scheme = "Tokyo Night"
+	else
+		config.color_scheme = "Catppuccin Latte"
+	end
 end
 
 config.font = wezterm.font({ family = "FiraCode Nerd Font Mono" })
@@ -74,6 +92,11 @@ config.keys = {
 			-- Deactivate the keytable after a timeout.
 			timeout_milliseconds = 1000,
 		}),
+	},
+	{
+		-- Reload wezterm config
+		key = "F5",
+		action = wezterm.action.ReloadConfiguration,
 	},
 }
 
