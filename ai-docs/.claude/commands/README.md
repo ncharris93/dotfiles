@@ -14,7 +14,8 @@ The workflow consists of 5 numbered commands that build upon each other:
 - **Project-Aware**: Adapts approach based on project type (MVP, POC, Enterprise)
 - **Multi-Persona Collaboration**: Uses 6 engineering personas for comprehensive planning
 - **Behavioral TDD**: Ensures focused, test-driven implementation
-- **Minimal Artifacts**: Only creates 2 documents (requirements.md and epic.md)
+- **Feature Status Tracking**: Organizes feature-spec.yml files by status (planned/in-progress/done)
+- **Epic-Specific Context**: Each epic has its own folder structure and context isolation
 
 ## Command Flow
 
@@ -29,8 +30,9 @@ The workflow consists of 5 numbered commands that build upon each other:
 - Stores context for subsequent commands
 
 **Output**: 
-- `./project-management/requirements/[feature]-requirements.md`
-- `.project-context` file with PROJECT_TYPE and paths
+- `./project-management/[epic-name]/requirements.md`
+- `./project-management/[epic-name]/` folder structure with status subfolders
+- `./project-management/[epic-name]/.project-context` file with all context
 
 **Next**: Automatically suggests `/2-epic-planning`
 
@@ -46,8 +48,8 @@ The workflow consists of 5 numbered commands that build upon each other:
 - Breaks down into prioritized features
 
 **Output**: 
-- `./project-management/epics/[epic-name].md`
-- Updated `.project-context` with EPIC_PATH
+- `./project-management/[epic-name]/epic.md`
+- Epic document with feature breakdown and technical approach
 
 **Next**: Suggests `/3-feature-refinement [feature-name]`
 
@@ -63,54 +65,69 @@ The workflow consists of 5 numbered commands that build upon each other:
 - Team Lead ensures simplicity
 
 **Output**: 
-- Updated epic.md with refined feature details
-- Technical decisions and approach documented
+- `./project-management/[epic-name]/planned/[feature-name]-spec.yml`
+- Detailed feature specification with tasks and technical approach
 
-**Next**: Suggests `/4-tdd-implementation [task-name]`
+**Next**: Suggests `/4-tdd-implementation [task-id]` (first task from the feature)
 
-### 4. TDD Implementation (`/4-tdd-implementation [task-name]`)
+### 4. TDD Implementation (`/4-tdd-implementation [task-id]`)
 
-**Purpose**: Implement tasks using behavioral test-driven development
+**Purpose**: Implement individual tasks using behavioral test-driven development
 
 **What it does**:
+- Finds the feature containing the specified task_id
+- Auto-moves feature-spec.yml from `planned/` to `in-progress/` (if first task)
+- Updates specific task status from 'pending' to 'in-progress'
 - Discovers test framework automatically
 - Follows strict RED-GREEN-REFACTOR cycle
-- Writes behavioral tests first
+- Writes behavioral tests first (focused on task acceptance criteria)
 - Implements minimal code to pass
-- Maintains focus on acceptance criteria
+- Maintains focus on single task scope
 - Never deletes tests without good reason
+- Marks task as 'completed' when done
 
 **Output**: 
-- Implemented code with full test coverage
+- Implemented code with full test coverage for the task
+- Task marked as completed with completion date
+- Status summary of other tasks in the feature
 - Updated context with progress
 
-**Next**: Suggests next task or `/5-verify-completion`
+**Next**: Suggests next task or `/5-verify-completion [task-id]` or `/5-verify-completion [feature-name]`
 
-### 5. Verify Completion (`/5-verify-completion`)
+### 5. Verify Completion (`/5-verify-completion [task-id|feature-name]`)
 
-**Purpose**: Ensure feature meets all requirements
+**Purpose**: Verify task completion or full feature readiness
 
 **What it does**:
+- **Task Verification**: Confirms specific task implementation meets acceptance criteria
+- **Feature Verification**: Ensures all tasks are complete and feature meets requirements
 - Traces requirements to implementation
 - Runs all quality checks
 - Verifies test coverage
 - Checks documentation
 - Confirms operational readiness
+- Auto-moves feature-spec.yml from `in-progress/` to `done/` (feature verification only)
 
 **Output**: 
-- Verification report
+- Verification report (task or feature scope)
 - Pass/Fail status
-- Next steps (PR creation or fixes needed)
+- Task completion confirmation OR Feature moved to done status
+- Next steps (continue with tasks, verify feature, or create PR)
 
 ## Context Management
 
-The workflow uses `.project-context` file to persist:
+Each epic maintains its own isolated `.project-context` file in its folder:
+
+**Epic-specific `.project-context` (per epic folder):**
 - `PROJECT_TYPE`: MVP, POC, Enterprise, etc.
-- `REQUIREMENTS_PATH`: Path to requirements document
-- `DOCS_PATH`: Where artifacts are stored
-- `EPIC_PATH`: Path to current epic
-- `LAST_REFINED_FEATURE`: Most recent refinement
-- `LAST_IMPLEMENTED_TASK`: Most recent implementation
+- `DOCS_PATH`: Where artifacts are stored (./project-management)
+- `EPIC_NAME`: This epic's name
+- `REQUIREMENTS_PATH`: Path to this epic's requirements document
+- `EPIC_PATH`: Path to this epic's planning document
+- `LAST_IMPLEMENTED_TASK`: Most recent task implementation
+- `LAST_IMPLEMENTED_FEATURE`: Most recent feature implementation
+
+This approach ensures complete epic isolation with no shared state between epics.
 
 ## Best Practices
 
@@ -121,12 +138,44 @@ The workflow uses `.project-context` file to persist:
 5. **Test First**: Never skip the TDD red phase
 6. **Verify Often**: Run `/5-verify-completion` after major milestones
 
+## Project Structure
+
+Each epic creates a self-contained folder structure:
+
+```
+./project-management/[epic-name]/
+├── .project-context          # Epic-specific context
+├── requirements.md           # Initial requirements
+├── epic.md                  # Epic planning document
+├── planned/                 # Feature specs ready for implementation
+│   └── [feature]-spec.yml   # Contains tasks with status: 'pending'
+├── in-progress/            # Features currently being implemented
+│   └── [feature]-spec.yml   # Contains tasks with mixed status: 'pending'/'in-progress'/'completed'
+└── done/                   # Completed features
+    └── [feature]-spec.yml   # All tasks have status: 'completed'
+```
+
+**Task Status Tracking within feature-spec.yml:**
+```yaml
+implementation:
+  detailed_tasks:
+    - id: 'login-api'
+      status: 'completed'      # pending/in-progress/completed
+      started_date: '2024-01-15'
+      completed_date: '2024-01-16'
+    - id: 'login-ui'
+      status: 'in-progress'
+      started_date: '2024-01-16'
+    - id: 'validation'
+      status: 'pending'
+```
+
 ## Token Efficiency
 
 This workflow minimizes token usage by:
-- Eliminating duplicate artifacts (no separate spec.yml)
+- Epic-specific context isolation prevents information bleeding
 - Using context persistence instead of re-parsing
-- Updating documents in-place vs creating new ones
+- Status-based organization provides clear feature tracking
 - Focusing personas only on relevant features
 
 ## Example Usage
@@ -138,17 +187,23 @@ This workflow minimizes token usage by:
 # After requirements are gathered
 /2-epic-planning
 
-# Refine the login feature
+# Refine the login feature (creates tasks: login-api, login-ui, validation)
 /3-feature-refinement User Login
 
-# Implement the first task
-/4-tdd-implementation Create login API endpoint
+# Implement first task in the feature
+/4-tdd-implementation login-api
 
-# Continue with more tasks...
-/4-tdd-implementation Add login form component
+# Verify the task works
+/5-verify-completion login-api
 
-# Verify everything works
-/5-verify-completion
+# Continue with next task
+/4-tdd-implementation login-ui
+
+# Implement final task
+/4-tdd-implementation validation
+
+# Verify entire feature is complete (moves to done/)
+/5-verify-completion User Login
 
 # Ready for PR!
 ```

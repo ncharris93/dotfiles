@@ -4,21 +4,27 @@ You are facilitating a detailed technical refinement session for a specific feat
 
 ## Variables:
 
-epic_path: $ARGUMENTS  
-feature_id: $ARGUMENTS
+feature_name: $ARGUMENTS
 refinement_context: $ARGUMENTS
 
 ARGUMENTS PARSING: Parse from "$ARGUMENTS":
-- epic_path: Path to the epic document
-- feature_id: Which feature to refine (name or number)
-- refinement_context: Any specific concerns to address
+- feature_name: Which feature to refine (name from epic)
+- refinement_context: Any specific concerns to address (optional)
+
+## Context Loading
+
+```bash
+# Load epic-specific context
+source "$DOCS_PATH/[epic-name]/.project-context"
+# This provides: PROJECT_TYPE, DOCS_PATH, EPIC_NAME, REQUIREMENTS_PATH, EPIC_PATH
+```
 
 ## Pre-Refinement Setup
 
 1. **Load Context**:
-   - Read the epic document
-   - Load the current feature-spec.yml
-   - Identify the specific feature to refine
+   - Read the epic document at $EPIC_PATH
+   - Read requirements at $REQUIREMENTS_PATH
+   - Identify the specific feature to refine from the epic
    - Check for any existing technical documentation
 
 2. **Identify Technical Participants**:
@@ -153,7 +159,9 @@ story:
 
 ### Phase 4: Update Feature Spec
 
-Update the feature-spec.yml file with refined details:
+Create or update the feature-spec.yml file in the epic's `planned/` folder with refined details.
+
+**File location**: `$DOCS_PATH/$EPIC_NAME/planned/[feature-name]-spec.yml`
 
 ```yaml
 implementation:
@@ -245,9 +253,11 @@ Present to the user:
 ## Next Steps
 
 Inform the user:
-- Continue with next feature: `/3-feature-refinement [epic-path] [next-feature]`
-- Or proceed to implementation: `/4-tdd-implementation [spec-path] [story-id]`
+- Continue with next feature: `/3-feature-refinement [next-feature-name]`
+- Or proceed to implement first task: `/4-tdd-implementation [first-task-id]`
 - Review and adjust the refined spec if needed
+
+**Task IDs created**: List the task IDs that were created for easy reference
 
 ## Success Criteria
 

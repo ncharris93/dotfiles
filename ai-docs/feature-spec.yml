@@ -45,9 +45,12 @@ implementation:
     - id: 'task-1'
       owner: 'frontend'
       description: ''
+      status: 'pending'
       acceptance_criteria: []
       dependencies: []
       code_spec: ''
+      started_date: ''
+      completed_date: ''
 
 deployment:
   phases: []

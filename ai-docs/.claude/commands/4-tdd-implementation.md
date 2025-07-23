@@ -4,22 +4,33 @@ You are implementing a specific story using behavioral TDD methodology. This ens
 
 ## Variables:
 
-task_name: $ARGUMENTS
+task_id: $ARGUMENTS
+feature_name: $ARGUMENTS
+
+ARGUMENTS PARSING: Parse from "$ARGUMENTS":
+- task_id: The specific task ID to implement (e.g., "task-1", "login-api-endpoint")
+- feature_name: The feature containing this task (extracted from task_id or specified)
 
 ## Context Loading
 
 ```bash
-# Load project context
-source ./.project-context
-# Provides: PROJECT_TYPE, EPIC_PATH, etc.
+# Load epic-specific context
+source "$DOCS_PATH/[epic-name]/.project-context"
+# This provides: PROJECT_TYPE, DOCS_PATH, EPIC_NAME, REQUIREMENTS_PATH, EPIC_PATH
 ```
 
 ## Pre-Implementation Setup
 
-### 1. Context Loading
+### 1. Context Loading and Status Update
 - Read the epic document at $EPIC_PATH
-- Find the specific task named "$task_name"
-- Load acceptance criteria and technical approach
+- **Find the feature-spec.yml containing task_id**:
+  - First check `$DOCS_PATH/$EPIC_NAME/planned/` for feature files
+  - Then check `$DOCS_PATH/$EPIC_NAME/in-progress/` for feature files
+  - Load the feature-spec.yml that contains the specified task_id
+- **Auto-move feature from `planned/` to `in-progress/` if this is the first task**
+- **Update the specific task status from 'pending' to 'in-progress'**
+- **Set task started_date to current date**
+- Load task acceptance criteria and technical approach
 - Consider PROJECT_TYPE in implementation choices
 
 ### 2. Test Framework Discovery
@@ -225,15 +236,17 @@ After each test-implement cycle:
 2. Check if any new edge cases were discovered
 3. Verify you're still aligned with the spec
 
-## Completion Criteria
+## Task Completion Criteria
 
-The story is complete when:
-- All acceptance criteria have passing tests
+The task is complete when:
+- All task acceptance criteria have passing tests
 - All tests are green
 - Code passes linting and type checking
 - Coverage is adequate (check project standards)
 - Code is refactored and clean
 - No TODO comments remain
+- **Task status updated from 'in-progress' to 'completed'**
+- **Task completed_date set to current date**
 
 ## Final Steps
 
@@ -245,24 +258,29 @@ The story is complete when:
 ## Summary Output
 
 Provide the user with:
-- Number of tests written
+- Task ID completed
+- Number of tests written for this task
 - Code coverage achieved
 - Files created/modified
-- Any deviations from the spec and why
-- Suggestions for next story to implement
+- Any deviations from the task spec and why
+- Status of other tasks in this feature (how many pending/in-progress/completed)
+- Suggestions for next task to implement
 
 ## Next Steps
 
 Save progress:
 ```bash
-echo "LAST_IMPLEMENTED_TASK=$task_name" >> ./.project-context
+echo "LAST_IMPLEMENTED_TASK=$task_id" >> ./.project-context
+echo "LAST_IMPLEMENTED_FEATURE=$feature_name" >> ./.project-context
 ```
 
 ```
 Next step options:
-- Implement another task: /4-tdd-implementation [next-task-name]
-- Verify completion: /5-verify-completion
-- All tasks done? Create PR with git
+- Implement next task in this feature: /4-tdd-implementation [next-task-id]
+- Implement task in another feature: /4-tdd-implementation [other-task-id]
+- Verify feature completion (if all tasks done): /5-verify-completion [feature-name]
+- Verify just this task: /5-verify-completion [task-id]
+- All features done? Create PR with git
 ```
 
 ## Important Principles

@@ -9,9 +9,9 @@ additional_context: $ARGUMENTS
 ## Context Loading
 
 ```bash
-# Load project context from previous step
-source ./.project-context
-# This provides: PROJECT_TYPE, REQUIREMENTS_PATH, DOCS_PATH
+# Load epic-specific context from previous step
+source "$DOCS_PATH/[epic-name]/.project-context"
+# This provides: PROJECT_TYPE, DOCS_PATH, EPIC_NAME, REQUIREMENTS_PATH, EPIC_PATH
 ```
 
 ## Pre-Meeting Setup
@@ -26,7 +26,7 @@ You are the **Lead Facilitator** managing a collaborative planning session with 
 
 **Important**: The Team Lead has final say on all technical decisions to ensure simplicity and prevent over-engineering.
 
-Your goal is to produce a single epic document: `$DOCS_PATH/epics/[epic-name].md`
+Your goal is to produce a single epic document: `$EPIC_PATH` (the epic folder structure should already exist from the previous step).
 
 ### Phase 1: Requirements Review & Clarification (All Personas)
 
@@ -175,11 +175,6 @@ Present a summary to the user:
 - Timeline is realistic and phased
 
 ## Next Steps
-
-Save context and provide next command:
-```bash
-echo "EPIC_PATH=$EPIC_PATH" >> ./.project-context
-```
 
 Inform the user:
 ```

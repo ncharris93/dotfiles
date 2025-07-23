@@ -8,10 +8,14 @@ initial_request: $ARGUMENTS
 
 ## Context Persistence
 
-Store project context for use in subsequent commands:
+Store epic-specific context for use in subsequent commands:
+
 ```bash
-echo "PROJECT_TYPE=$PROJECT_TYPE" > ./.project-context
-echo "REQUIREMENTS_PATH=$REQUIREMENTS_PATH" >> ./.project-context
+echo "PROJECT_TYPE=$PROJECT_TYPE" > "$DOCS_PATH/[epic-name]/.project-context"
+echo "DOCS_PATH=$DOCS_PATH" >> "$DOCS_PATH/[epic-name]/.project-context"
+echo "EPIC_NAME=[epic-name]" >> "$DOCS_PATH/[epic-name]/.project-context"
+echo "REQUIREMENTS_PATH=$DOCS_PATH/[epic-name]/requirements.md" >> "$DOCS_PATH/[epic-name]/.project-context"
+echo "EPIC_PATH=$DOCS_PATH/[epic-name]/epic.md" >> "$DOCS_PATH/[epic-name]/.project-context"
 ```
 
 ## Phase 1: Initial Understanding
@@ -58,7 +62,7 @@ Ask clarifying questions such as:
 
 Once you have sufficient clarity, create a requirements document.
 
-Determine storage location:
+Determine storage location and create project structure:
 ```bash
 if [ -d "./project-management" ]; then
     DOCS_PATH="./project-management"
@@ -67,8 +71,20 @@ else
     # Wait for user input or use default
 fi
 
-REQUIREMENTS_PATH="$DOCS_PATH/requirements/[feature-name]-requirements.md"
+REQUIREMENTS_PATH="$DOCS_PATH/[epic-name]/requirements.md"
 ```
+
+**Create the epic-specific project structure:**
+```
+/project-management/[epic-name]/
+├── .project-context
+├── requirements.md
+├── planned/
+├── in-progress/
+└── done/
+```
+
+The `.project-context` file should contain epic-specific context that will be used throughout the feature development lifecycle.
 
 ### Requirements Document Template:
 

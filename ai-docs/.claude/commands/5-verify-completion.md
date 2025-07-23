@@ -4,35 +4,56 @@ You are verifying that the implemented feature meets all requirements and is rea
 
 ## Variables:
 
-verification_focus: $ARGUMENTS
+target: $ARGUMENTS
+
+ARGUMENTS PARSING: Parse from "$ARGUMENTS":
+- target: Either a task_id (e.g., "task-1") for task verification, or feature_name for full feature verification
 
 ## Context Loading
 
 ```bash
-# Load project context
-source ./.project-context
-# Provides: PROJECT_TYPE, REQUIREMENTS_PATH, EPIC_PATH
+# Load epic-specific context
+source "$DOCS_PATH/[epic-name]/.project-context"
+# This provides: PROJECT_TYPE, DOCS_PATH, EPIC_NAME, REQUIREMENTS_PATH, EPIC_PATH
 ```
 
 ## Verification Process
 
 ### Phase 1: Requirements Traceability
 
-1. **Load Documents**
+1. **Determine Verification Scope**
+   - If target is a task_id: Verify specific task implementation
+   - If target is a feature_name: Verify all tasks in feature are complete
+   
+2. **Load Documents**
    - Read requirements at $REQUIREMENTS_PATH
    - Read epic at $EPIC_PATH
+   - **Find the feature-spec.yml containing the target**:
+     - Search `$DOCS_PATH/$EPIC_NAME/in-progress/` for the relevant feature file
+     - If target is task_id, find which feature contains that task
+     - If target is feature_name, load that feature's spec file
 
-2. **Create Traceability Matrix**
+3. **Create Traceability Matrix**
+   
+   **For Task Verification:**
    ```markdown
-   | Requirement | Story/Task | Implementation | Tests | Status |
-   |-------------|------------|----------------|-------|--------|
-   | User can X  | TASK-001   | module.js:45   | ✓ 3   | DONE   |
-   | System validates Y | TASK-002 | api.js:78 | ✓ 5   | DONE   |
-   | Performance < 2s | TASK-003 | [multiple] | ✓ 1   | DONE   |
+   | Task Acceptance Criteria | Implementation | Tests | Status |
+   |--------------------------|----------------|-------|--------|
+   | User can login with email | auth.js:23 | ✓ 2 | DONE |
+   | Error shown for invalid credentials | auth.js:45 | ✓ 1 | DONE |
+   ```
+   
+   **For Feature Verification:**
+   ```markdown
+   | Task ID | Description | Implementation | Tests | Status |
+   |---------|-------------|----------------|-------|--------|
+   | task-1  | Login API   | auth.js:23     | ✓ 3   | DONE   |
+   | task-2  | Login UI    | LoginForm.tsx  | ✓ 5   | DONE   |
+   | task-3  | Validation  | validator.js   | ✓ 2   | DONE   |
    ```
 
-3. **Identify Gaps**
-   - Any requirements not implemented?
+4. **Identify Gaps**
+   - Any task acceptance criteria not implemented?
    - Any acceptance criteria not tested?
    - Any scope creep detected?
 
@@ -213,13 +234,34 @@ Provide the user with:
 - Recommendations for resolution
 - Whether feature is ready for release
 
+## Completion Actions
+
+**If Task Verification PASSED:**
+1. **Confirm task status is marked as 'completed' in feature-spec.yml**
+2. **Display task completion summary**
+3. **Show remaining tasks in this feature**
+
+**If Feature Verification PASSED (all tasks completed):**
+1. **Verify all tasks in feature have status 'completed'**
+2. **Move feature-spec.yml from `$DOCS_PATH/$EPIC_NAME/in-progress/` to `$DOCS_PATH/$EPIC_NAME/done/`**
+3. **Update feature metadata with completion date**
+4. **Display epic status overview showing completed feature**
+
 ## Next Steps
 
 ```
 Verification complete!
 
-If PASSED: Create PR with git
-If FAILED: /4-tdd-implementation [task-to-fix]
+If TASK verification PASSED: 
+- Continue with next task: /4-tdd-implementation [next-task-id]
+- Or verify whole feature: /5-verify-completion [feature-name]
+
+If FEATURE verification PASSED: 
+- Feature moved to done/ - Continue with next feature or create PR
+
+If FAILED: 
+- Fix task issues: /4-tdd-implementation [task-id]
+- Re-run verification after fixes
 ```
 
 ## Success Criteria
