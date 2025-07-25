@@ -202,14 +202,16 @@ Use factory functions to eliminate duplication and improve test maintainability:
 
 ```typescript
 // ✅ GOOD - Test-scoped factory with overrides
-const createTestUser = (overrides: Partial<Parameters<typeof User.createNew>[0]> = {}) => {
+const createTestUser = (
+  overrides: Partial<Parameters<typeof User.createNew>[0]> = {}
+) => {
   const defaults = {
     id: 'user-id',
     email: 'user@example.com',
     phone: '+12345678901',
     name: 'Test User',
   }
-  
+
   return User.createNew({ ...defaults, ...overrides })
 }
 
@@ -220,7 +222,7 @@ const duplicateUser = createTestUser({ email: 'duplicate@example.com' })
 // ❌ AVOID - Repetitive inline object creation
 const user = User.createNew({
   id: 'user-id',
-  email: 'user@example.com', 
+  email: 'user@example.com',
   phone: '+12345678901',
   name: 'Test User',
 }) // Repeated dozens of times across test file
@@ -273,6 +275,30 @@ describe('When external service is unavailable', () => {
   })
 })
 ```
+
+### Avoiding Excessive Mocking (Red Flag)
+
+**Excessive mocking is often a red flag indicating over-engineered or poorly designed tests.**
+
+When tests require extensive mocking of internal dependencies, it usually signals:
+
+- **Testing implementation details instead of behavior**
+- **Overly complex or tightly coupled code**
+- **Tests that will break when refactoring implementation**
+- **Missing focus on user-observable outcomes**
+
+**Guidelines for Appropriate Mocking:**
+
+1. **Mock external boundaries only**: Network calls, file system, third-party APIs
+2. **Preserve business logic**: Don't mock internal domain logic
+3. **Focus on failure modes**: Mock external failures to test error handling
+4. **Maintain behavior realism**: Mocked responses should reflect real service behavior
+
+**When extensive mocking is needed, consider:**
+
+- **Architectural refactoring**: Separate concerns to reduce coupling
+- **Integration testing**: Test larger units with fewer mocks
+- **Test-driven design**: Let test complexity guide better code structure
 
 ## Application Examples
 
