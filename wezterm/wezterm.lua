@@ -42,6 +42,18 @@ config.window_decorations = "INTEGRATED_BUTTONS"
 
 config.adjust_window_size_when_changing_font_size = false
 
+-- More scrollback history (default is 3500)
+config.scrollback_lines = 10000
+
+-- Use GPU for better rendering performance on modern Macs
+config.front_end = "WebGpu"
+
+-- Dim inactive panes so the active one stands out
+config.inactive_pane_hsb = {
+	saturation = 0.8,
+	brightness = 0.7,
+}
+
 local function resize_pane(key, direction)
 	return {
 		key = key,
@@ -61,6 +73,11 @@ config.keys = {
 	{ key = "k", mods = "LEADER", action = wezterm.action.ActivatePaneDirection("Up") },
 	{ key = "h", mods = "LEADER", action = wezterm.action.ActivatePaneDirection("Left") },
 	{ key = "l", mods = "LEADER", action = wezterm.action.ActivatePaneDirection("Right") },
+	-- Tab cycling: Leader+n/p to go next/previous
+	{ key = "n", mods = "LEADER", action = wezterm.action.ActivateTabRelative(1) },
+	{ key = "p", mods = "LEADER", action = wezterm.action.ActivateTabRelative(-1) },
+	-- Pane zoom: temporarily maximize current pane, toggle back with same key
+	{ key = "z", mods = "LEADER", action = wezterm.action.TogglePaneZoomState },
 	{
 		-- When the left arrow is pressed
 		key = "LeftArrow",
