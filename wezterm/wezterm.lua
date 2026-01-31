@@ -126,9 +126,6 @@ config.key_tables = {
 	},
 }
 
-config.set_environment_variables = {
-	PATH = "/opt/homebrew/bin:" .. os.getenv("PATH"),
-}
 
 wezterm.on("update-status", function(window)
 	-- Grab the utf8 character for the "powerline" left facing

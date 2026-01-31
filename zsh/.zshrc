@@ -23,7 +23,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="false"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
@@ -53,6 +53,9 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+# Type directory name to cd into it (e.g., `..` instead of `cd ..`)
+setopt AUTO_CD
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -60,12 +63,7 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='nvim'
-else
-  export EDITOR='nvim'
-fi
+export EDITOR='nvim'
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -74,7 +72,6 @@ fi
 #
 # Example aliases
 alias dcu="docker compose up"
-alias dc-="docker compose up -d"
 alias dcd="docker compose down"
 alias dcdv="docker compose down -v"
 alias dcr="docker compose restart"
@@ -94,14 +91,21 @@ source ~/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
 export PATH="$HOME/.nodenv/bin:$PATH"
 eval "$(nodenv init - zsh)"
 
-# pyenv
+# pyenv (lazy loaded)
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-export PATH="${HOME}/.pyenv/shims:${PATH}"
+pyenv() {
+  unfunction pyenv
+  eval "$(command pyenv init -)"
+  pyenv "$@"
+}
 
-# rbenv
-eval "$(rbenv init - zsh)"
+# rbenv (lazy loaded)
+rbenv() {
+  unfunction rbenv
+  eval "$(command rbenv init - zsh)"
+  rbenv "$@"
+}
 
 # postgres
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
@@ -119,6 +123,9 @@ export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+# zoxide - smart directory jumping (use `z` to jump, `zi` for interactive)
+eval "$(zoxide init zsh)"
 
 # Theme switching functions
 theme_dark() {
