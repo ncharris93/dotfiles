@@ -1,7 +1,6 @@
 local keymap = vim.keymap
 
 vim.g.mapleader = " "
-keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 -- move highlighted blocks of code
 keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -29,11 +28,6 @@ keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 keymap.set("i", "<C-c>", "<Esc>")
 
 keymap.set("n", "Q", "<nop>")
--- keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-keymap.set("n", "<leader>f", vim.lsp.buf.format)
-
-keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "next location list item" })
-keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "previous location list item" })
 
 keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "search and replace" })
 keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
@@ -43,7 +37,7 @@ keymap.set("n", "<leader>ts", "<cmd>!ts-node % <CR>")
 keymap.set("n", "<leader>js", "<cmd>!node % <CR>")
 
 -- fold current block
-keymap.set("n", "<leader>fo", "viBzF<CR>", { desc = "fold current block" })
+keymap.set("n", "<leader>fo", "viBzF", { desc = "fold current block" })
 
 -- Pane Navigation
 keymap.set("n", "<C-h>", "<C-w>h")
@@ -52,12 +46,8 @@ keymap.set("n", "<C-k>", "<C-w>k")
 keymap.set("n", "<C-l>", "<C-w>l")
 
 -- quickfix navigation
-keymap.set("n", "<C-]>", "<cmd>cn<CR>")
-keymap.set("n", "<C-[>", "<cmd>cp<CR>")
-
--- Pane Resizing
---keymap.set("n", "<Leader>+", "<C-w>><CR>")
---keymap.set("n", "<Leader>-", "<C-w><<CR>")
+keymap.set("n", "]q", "<cmd>cn<CR>zz", { desc = "next quickfix item" })
+keymap.set("n", "[q", "<cmd>cp<CR>zz", { desc = "previous quickfix item" })
 
 -- reload the config
 vim.keymap.set("n", "<leader>rr", function()

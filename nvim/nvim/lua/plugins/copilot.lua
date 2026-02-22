@@ -24,19 +24,15 @@ return {
 		event = "InsertEnter",
 		config = function()
 			require("copilot").setup({
-				suggestion = {
-					auto_trigger = true,
-					keymap = {
-						accept = "<C-j>",
-					},
-				},
+				suggestion = { enabled = false },
+				panel = { enabled = false },
 			})
 		end,
 	},
 	{
 		"CopilotC-Nvim/CopilotChat.nvim",
 		dependencies = {
-			{ "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
+			{ "zbirenbaum/copilot.lua" },
 			{ "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
 		},
 		opts = {
@@ -56,11 +52,6 @@ return {
 					detail = "Use @<Tab> or /<Tab> for options.",
 					insert = "<Tab>",
 				},
-				-- Close the chat
-				-- close = {
-				-- 	normal = "q",
-				-- 	-- insert = "<C-c>",
-				-- },
 				-- Reset the chat buffer
 				reset = {
 					normal = "<C-x>",

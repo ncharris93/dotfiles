@@ -25,10 +25,6 @@ return {
 	},
 	{
 		"nvim-tree/nvim-web-devicons",
-		dependencies = {
-			{ "vim-airline/vim-airline" },
-		},
-		priority = 1, -- lowest
 		config = true,
 	},
 }

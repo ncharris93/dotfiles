@@ -34,7 +34,17 @@ return {
 				desc = "find references",
 			},
 			{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "find files" },
-			{ "<leader>fhi", "<cmd>Telescope find_files hidden=true<cr>", desc = "find hidden" },
+			{ "<leader>fhi", "<cmd>Telescope find_files hidden=true<cr>", desc = "find incl hidden" },
+			{
+				"<leader>fgi",
+				function()
+					require("telescope.builtin").live_grep({
+						additional_args = { "--hidden", "--no-ignore" },
+						glob_pattern = "!.git/",
+					})
+				end,
+				desc = "grep incl dotfiles",
+			},
 			{ "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "grep" },
 			{ "<leader>fgb", "<cmd>Telescope git_branches<cr>", desc = "git branches" },
 			{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "find buffers" },

@@ -9,9 +9,9 @@ return {
 	},
 	opts = {
 		server = {
-			override = true, -- setup the server from the plugin if true
-			settings = {}, -- shortcut for `settings.tailwindCSS`
-			on_attach = function(client, bufnr) end, -- callback triggered when the server attaches to a buffer
+			override = false, -- use vim.lsp.config instead of deprecated require('lspconfig')
+			settings = {},
+			on_attach = function(client, bufnr) end,
 		},
 		document_color = {
 			enabled = true, -- can be toggled by commands

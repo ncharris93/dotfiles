@@ -1,6 +1,6 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
 	vim.fn.system({
 		"git",
 		"clone",
@@ -18,14 +18,9 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 require("lazy").setup({
-	{ "LazyVim/LazyVim" },
 	{ import = "plugins" },
-	--	{ import = "lazyvim.plugins.extras.dap.core" },
-	{ "airblade/vim-gitgutter" }, -- git gutter icons
-	{ "vim-airline/vim-airline" }, -- show current branch
+	{ "LazyVim/LazyVim" },
 	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} }, -- line indenting
 	{ "tpope/vim-sleuth" }, -- auto-adjust widths
-	{ "folke/neodev.nvim", opts = {} }, -- vim lua cmp
-	{ "tpope/vim-surround" },
 	change_detection = { notify = false },
 })

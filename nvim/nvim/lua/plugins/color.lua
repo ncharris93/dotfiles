@@ -62,7 +62,7 @@ return {
 					}
 				end,
 			})
-			
+
 			-- Just set up tokyonight, theme switching will be handled separately
 			vim.g.tokyonight_transparent = true
 			vim.cmd([[colorscheme tokyonight-night]])
@@ -76,11 +76,11 @@ return {
 		end,
 	},
 	{
-		"norcalli/nvim-colorizer.lua",
+		"NvChad/nvim-colorizer.lua",
 		event = "BufReadPost",
 		config = function()
 			require("colorizer").setup({
-				"*", -- Enable colorizer for all file types
+				filetypes = { "*" },
 			})
 		end,
 	},
