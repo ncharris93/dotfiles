@@ -60,6 +60,8 @@ return {
 					hl.LineNrBelow = {
 						fg = "#ff6188",
 					}
+					hl.SpellBad = { undercurl = true, sp = "#db4b4b" }
+					hl.SpellCap = { undercurl = true, sp = "#e0af68" }
 				end,
 			})
 

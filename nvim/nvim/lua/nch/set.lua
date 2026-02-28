@@ -26,6 +26,7 @@ vim.opt.smartcase = true
 vim.opt.ignorecase = true
 -- spell checking
 vim.opt.spell = true
+vim.opt.spelllang = "en_us"
 --font
 vim.opt.guifont = "Hack_Nerd_Font_Mono:h11"
 

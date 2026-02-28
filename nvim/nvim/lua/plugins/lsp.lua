@@ -32,7 +32,7 @@ return {
 			})
 
 			require("mason-lspconfig").setup({
-				ensure_installed = { "ts_ls", "jsonls", "html", "cssls", "lua_ls" },
+				ensure_installed = { "ts_ls", "jsonls", "html", "cssls", "lua_ls", "typos_lsp" },
 			})
 
 			-- Configure individual servers via vim.lsp.config (Nvim 0.11+)
@@ -58,6 +58,12 @@ return {
 						importModuleSpecifierPreference = "relative",
 						importModuleSpecifierEnding = "minimal",
 					},
+				},
+			})
+
+			vim.lsp.config("typos_lsp", {
+				init_options = {
+					diagnosticSeverity = "Hint",
 				},
 			})
 
