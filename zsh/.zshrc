@@ -84,6 +84,12 @@ alias vz="nvim ~/.zshrc && source ~/.zshrc"
 alias gmi="go mod init"
 alias j="jq '.scripts' package.json"
 
+# zoxide
+alias cd="z"
+alias ci="zi"
+
+alias c="claude"
+
 alias pd="pnpm dev"
 alias pt="pnpm test"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
