@@ -83,6 +83,18 @@ return {
 		config = function()
 			require("colorizer").setup({
 				filetypes = { "*" },
+				options = {
+					parsers = {
+						css = true,
+						hex = { default = true },
+						rgb = { enable = true },
+						hsl = { enable = true },
+						names = { enable = false },
+					},
+					display = {
+						mode = "background",
+					},
+				},
 			})
 		end,
 	},
