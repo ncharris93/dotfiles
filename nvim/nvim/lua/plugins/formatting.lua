@@ -30,7 +30,8 @@ return {
 			formatters = {
 				prettier = {
 					condition = function(self, ctx)
-						return vim.fs.find({
+						return vim.bo.filetype == "markdown"
+						or vim.fs.find({
 							".prettierrc",
 							".prettierrc.json",
 							".prettierrc.yml",

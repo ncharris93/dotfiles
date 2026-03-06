@@ -18,7 +18,6 @@ return {
 				"javascript",
 				"jsdoc",
 				"json",
-				"jsonc",
 				"lua",
 				"luadoc",
 				"luap",
@@ -56,6 +55,11 @@ return {
 			vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 				pattern = { "*.db" },
 				command = "set filetype=json",
+			})
+
+			-- Treat JSONC as JSON since treesitter has no separate jsonc parser
+			vim.filetype.add({
+				extension = { jsonc = "json" },
 			})
 		end,
 	},
