@@ -84,11 +84,8 @@ alias vz="nvim ~/.zshrc && source ~/.zshrc"
 alias gmi="go mod init"
 alias j="jq '.scripts' package.json"
 
-# zoxide
-alias cd="z"
-alias ci="zi"
-
 alias c="claude"
+alias cyolo="claude --dangerously-skip-permissions"
 
 alias pd="pnpm dev"
 alias pt="pnpm test"
@@ -134,6 +131,9 @@ export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
+# fzf - use dark text on highlighted line for readability
+export FZF_DEFAULT_OPTS='--color=fg+:black,bg+:bright-cyan'
+
 # zoxide - smart directory jumping (use `z` to jump, `zi` for interactive)
 eval "$(zoxide init zsh)"
 
@@ -147,3 +147,6 @@ theme_light() {
   echo "light" > ~/.theme-mode
   echo "Switched to light theme. Press F5 in wezterm to reload config."
 }
+
+# Added by Antigravity
+export PATH="/Users/noah/.antigravity/antigravity/bin:$PATH"

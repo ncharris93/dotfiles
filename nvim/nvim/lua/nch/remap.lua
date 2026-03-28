@@ -49,6 +49,12 @@ keymap.set("n", "<C-l>", "<C-w>l")
 keymap.set("n", "]q", "<cmd>cn<CR>zz", { desc = "next quickfix item" })
 keymap.set("n", "[q", "<cmd>cp<CR>zz", { desc = "previous quickfix item" })
 
+-- copy filepath to clipboard
+keymap.set("n", "<leader>cp", function()
+	vim.fn.setreg("+", vim.fn.expand("%:p"))
+	vim.notify("Copied: " .. vim.fn.expand("%:p"))
+end, { desc = "Copy file path" })
+
 -- reload the config
 vim.keymap.set("n", "<leader>rr", function()
 	-- Clear and reset require cache

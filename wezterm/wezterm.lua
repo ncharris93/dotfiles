@@ -65,8 +65,8 @@ config.keys = {
 	-- word jump in the terminal
 	{ key = "RightArrow", mods = "OPT", action = wezterm.action.SendString("\x1bf") },
 	-- tmux
-	{ key = '"', mods = "LEADER", action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-	{ key = "%", mods = "LEADER", action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
+	{ key = "%", mods = "LEADER", action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+	{ key = '"', mods = "LEADER", action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
 	{ key = "x", mods = "LEADER", action = wezterm.action.CloseCurrentPane({ confirm = false }) },
 	-- vim-like pane switching
 	{ key = "j", mods = "LEADER", action = wezterm.action.ActivatePaneDirection("Down") },
@@ -125,7 +125,6 @@ config.key_tables = {
 		resize_pane("l", "Right"),
 	},
 }
-
 
 wezterm.on("update-status", function(window)
 	-- Grab the utf8 character for the "powerline" left facing
